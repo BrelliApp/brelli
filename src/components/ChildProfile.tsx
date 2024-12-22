@@ -1,4 +1,4 @@
-import { User, Instagram, Tiktok, MessageSquare } from "lucide-react";
+import { User, Instagram, MessageSquare } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ChildProfileProps {
@@ -32,7 +32,7 @@ export const ChildProfile = ({ name, age, socialAccounts }: ChildProfileProps) =
           )}
           {socialAccounts.tiktok && (
             <div className="flex items-center gap-2">
-              <Tiktok className="h-5 w-5" />
+              <MessageSquare className="h-5 w-5" />
               <span className="text-sm">{socialAccounts.tiktok}</span>
             </div>
           )}

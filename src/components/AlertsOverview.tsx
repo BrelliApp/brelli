@@ -1,4 +1,4 @@
-import { BellAlert, ShieldCheck } from "lucide-react";
+import { Bell, ShieldCheck } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Alert {
@@ -34,7 +34,7 @@ export const AlertsOverview = ({ alerts }: AlertsOverviewProps) => {
             <span className="text-sm">All Clear</span>
           </div>
         ) : (
-          <BellAlert className="h-5 w-5 text-warning-foreground" />
+          <Bell className="h-5 w-5 text-warning-foreground" />
         )}
       </CardHeader>
       <CardContent>
