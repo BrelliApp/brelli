@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { toast } from "sonner";  // Import toast from sonner
-import { Button } from "@/components/ui/button";  // Import Button from shadcn/ui
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 import { ChildProfile } from "@/components/ChildProfile";
 import { ActivityLog } from "@/components/ActivityLog";
 import { AlertsOverview } from "@/components/AlertsOverview";
@@ -47,37 +47,63 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container py-8">
-        <h1 className="text-3xl font-bold mb-8">Parent Dashboard</h1>
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Parent Dashboard</h1>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="md:col-span-2">
-            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow">
-                <h2 className="text-xl font-semibold mb-4">Add New Child</h2>
-                <AddChildForm onAddChild={handleAddChild} />
-              </div>
-
-              {children.map((child, index) => (
-                <div key={index} className="space-y-4">
-                  <ChildProfile {...child} />
-                  <Button
-                    variant="outline"
-                    onClick={() => setSelectedChild(index)}
-                    className={selectedChild === index ? "ring-2 ring-primary" : ""}
-                  >
-                    Manage Social Accounts
-                  </Button>
-                  {selectedChild === index && (
-                    <div className="bg-white p-6 rounded-lg shadow">
-                      <h3 className="text-lg font-semibold mb-4">Add Social Account</h3>
-                      <AddSocialAccount onAddSocial={handleAddSocial} />
-                    </div>
-                  )}
-                </div>
-              ))}
-
-              <ActivityLog activities={[]} />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-6">
+            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+              <h2 className="text-xl font-semibold text-gray-900 mb-4">Add New Child</h2>
+              <AddChildForm onAddChild={handleAddChild} />
             </div>
+
+            {children.length > 0 && (
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
+                <h2 className="text-xl font-semibold text-gray-900 mb-4">Children</h2>
+                <div className="space-y-6">
+                  {children.map((child, index) => (
+                    <div key={index} className="space-y-4">
+                      <ChildProfile {...child} />
+                      <div className="flex gap-4">
+                        <Button
+                          variant={selectedChild === index ? "default" : "outline"}
+                          onClick={() => setSelectedChild(index)}
+                          className="w-full"
+                        >
+                          Manage Social Accounts
+                        </Button>
+                      </div>
+                      {selectedChild === index && (
+                        <div className="bg-gray-50 rounded-lg p-6">
+                          <h3 className="text-lg font-semibold text-gray-900 mb-4">Add Social Account</h3>
+                          <AddSocialAccount onAddSocial={handleAddSocial} />
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <ActivityLog
+              activities={[
+                {
+                  id: 1,
+                  type: "alert",
+                  content: "Suspicious activity detected on Instagram",
+                  timestamp: "2 minutes ago",
+                  platform: "Instagram"
+                },
+                {
+                  id: 2,
+                  type: "message",
+                  content: "New direct message received",
+                  timestamp: "5 minutes ago",
+                  platform: "TikTok"
+                }
+              ]}
+            />
           </div>
           
           <div className="space-y-6">
