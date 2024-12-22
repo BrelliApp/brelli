@@ -1,57 +1,47 @@
+import { useState } from "react";
 import { ChildProfile } from "@/components/ChildProfile";
 import { ActivityLog } from "@/components/ActivityLog";
 import { AlertsOverview } from "@/components/AlertsOverview";
+import { AddChildForm } from "@/components/AddChildForm";
+import { AddSocialAccount } from "@/components/AddSocialAccount";
 
-// Mock data - in a real app this would come from an API
-const mockChild = {
-  name: "Sarah Johnson",
-  age: 14,
+interface Child {
+  name: string;
+  age: number;
   socialAccounts: {
-    instagram: "@sarah.j",
-    tiktok: "@sarahj_2024",
-  },
-};
-
-const mockActivities = [
-  {
-    id: 1,
-    type: "friend_request" as const,
-    content: "New friend request from @unknown_user",
-    timestamp: "2 minutes ago",
-    platform: "Instagram",
-  },
-  {
-    id: 2,
-    type: "message" as const,
-    content: "New message in group chat 'School Friends'",
-    timestamp: "15 minutes ago",
-    platform: "Snapchat",
-  },
-  {
-    id: 3,
-    type: "alert" as const,
-    content: "Unusual activity detected - Multiple messages from unknown account",
-    timestamp: "1 hour ago",
-    platform: "TikTok",
-  },
-];
-
-const mockAlerts = [
-  {
-    id: 1,
-    severity: "medium" as const,
-    message: "Multiple friend requests from unknown accounts",
-    timestamp: "2h ago",
-  },
-  {
-    id: 2,
-    severity: "low" as const,
-    message: "Extended screen time detected",
-    timestamp: "4h ago",
-  },
-];
+    instagram?: string;
+    tiktok?: string;
+  };
+}
 
 const Index = () => {
+  const [children, setChildren] = useState<Child[]>([]);
+  const [selectedChild, setSelectedChild] = useState<number | null>(null);
+
+  const handleAddChild = (name: string) => {
+    setChildren([...children, { name, age: 0, socialAccounts: {} }]);
+  };
+
+  const handleAddSocial = (social: { platform: "instagram" | "tiktok"; username: string }) => {
+    if (selectedChild === null) {
+      toast.error("Please select a child first");
+      return;
+    }
+
+    setChildren(children.map((child, index) => {
+      if (index === selectedChild) {
+        return {
+          ...child,
+          socialAccounts: {
+            ...child.socialAccounts,
+            [social.platform]: social.username
+          }
+        };
+      }
+      return child;
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="container py-8">
@@ -60,13 +50,36 @@ const Index = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="md:col-span-2">
             <div className="space-y-6">
-              <ChildProfile {...mockChild} />
-              <ActivityLog activities={mockActivities} />
+              <div className="bg-white p-6 rounded-lg shadow">
+                <h2 className="text-xl font-semibold mb-4">Add New Child</h2>
+                <AddChildForm onAddChild={handleAddChild} />
+              </div>
+
+              {children.map((child, index) => (
+                <div key={index} className="space-y-4">
+                  <ChildProfile {...child} />
+                  <Button
+                    variant="outline"
+                    onClick={() => setSelectedChild(index)}
+                    className={selectedChild === index ? "ring-2 ring-primary" : ""}
+                  >
+                    Manage Social Accounts
+                  </Button>
+                  {selectedChild === index && (
+                    <div className="bg-white p-6 rounded-lg shadow">
+                      <h3 className="text-lg font-semibold mb-4">Add Social Account</h3>
+                      <AddSocialAccount onAddSocial={handleAddSocial} />
+                    </div>
+                  )}
+                </div>
+              ))}
+
+              <ActivityLog activities={[]} />
             </div>
           </div>
           
           <div className="space-y-6">
-            <AlertsOverview alerts={mockAlerts} />
+            <AlertsOverview alerts={[]} />
           </div>
         </div>
       </div>
