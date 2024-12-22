@@ -1,4 +1,4 @@
-import { User, Instagram, MessageSquare } from "lucide-react";
+import { User, Instagram, MessageSquare, Ghost } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ChildProfileProps {
@@ -7,6 +7,7 @@ interface ChildProfileProps {
   socialAccounts: {
     instagram?: string;
     tiktok?: string;
+    snapchat?: string;
   };
 }
 
@@ -23,17 +24,23 @@ export const ChildProfile = ({ name, age, socialAccounts }: ChildProfileProps) =
         </div>
       </CardHeader>
       <CardContent>
-        <div className="flex gap-4 mt-4">
+        <div className="flex flex-wrap gap-4 mt-4">
           {socialAccounts.instagram && (
             <div className="flex items-center gap-2">
-              <Instagram className="h-5 w-5" />
+              <Instagram className="h-5 w-5 text-pink-600" />
               <span className="text-sm">{socialAccounts.instagram}</span>
             </div>
           )}
           {socialAccounts.tiktok && (
             <div className="flex items-center gap-2">
-              <MessageSquare className="h-5 w-5" />
+              <MessageSquare className="h-5 w-5 text-black" />
               <span className="text-sm">{socialAccounts.tiktok}</span>
+            </div>
+          )}
+          {socialAccounts.snapchat && (
+            <div className="flex items-center gap-2">
+              <Ghost className="h-5 w-5 text-yellow-400" />
+              <span className="text-sm">{socialAccounts.snapchat}</span>
             </div>
           )}
         </div>

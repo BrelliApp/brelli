@@ -16,6 +16,7 @@ interface Child {
   socialAccounts: {
     instagram?: string;
     tiktok?: string;
+    snapchat?: string;
   };
 }
 
@@ -29,7 +30,7 @@ const Index = () => {
     setIsAddChildOpen(false);
   };
 
-  const handleAddSocial = (social: { platform: "instagram" | "tiktok"; username: string }) => {
+  const handleAddSocial = (social: { platform: "instagram" | "tiktok" | "snapchat"; username: string }) => {
     if (selectedChild === null) {
       toast.error("Please select a child first");
       return;
