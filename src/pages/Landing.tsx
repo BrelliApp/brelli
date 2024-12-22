@@ -2,9 +2,48 @@ import { Button } from "@/components/ui/button";
 import { Shield, Users, Bell, Brain, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { RunwareService } from "@/services/runware";
+import { toast } from "sonner";
 
 const Landing = () => {
   const navigate = useNavigate();
+  const [apiKey, setApiKey] = useState("");
+  const [images, setImages] = useState<{ [key: string]: string }>({});
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const generateImages = async () => {
+    if (!apiKey) {
+      toast.error("Please enter your Runware API key");
+      return;
+    }
+
+    setIsGenerating(true);
+    const runwareService = new RunwareService(apiKey);
+
+    try {
+      const prompts = {
+        shield: "A glowing protective shield surrounding digital messages, abstract minimalist style, blue and white colors, professional cybersecurity concept",
+        analysis: "Neural network analyzing text patterns, abstract visualization, professional tech style, blue gradient",
+        safety: "Parent and child silhouettes surrounded by digital protection symbols, minimalist professional style, cybersecurity concept"
+      };
+
+      const results = await Promise.all(
+        Object.entries(prompts).map(async ([key, prompt]) => {
+          const result = await runwareService.generateImage({ positivePrompt: prompt });
+          return [key, result.imageURL];
+        })
+      );
+
+      setImages(Object.fromEntries(results));
+      toast.success("Images generated successfully!");
+    } catch (error) {
+      toast.error("Failed to generate images. Please check your API key.");
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -31,6 +70,51 @@ const Landing = () => {
           </Button>
         </div>
       </header>
+
+      {/* AI Visualization Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold mb-4">AI-Powered Protection Visualized</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Experience how our AI technology creates a protective shield around your children's online communications
+            </p>
+          </div>
+
+          <div className="mb-8 max-w-md mx-auto">
+            <div className="flex gap-4">
+              <Input
+                type="password"
+                placeholder="Enter your Runware API key"
+                value={apiKey}
+                onChange={(e) => setApiKey(e.target.value)}
+              />
+              <Button
+                onClick={generateImages}
+                disabled={isGenerating}
+                className="whitespace-nowrap"
+              >
+                {isGenerating ? "Generating..." : "Generate Images"}
+              </Button>
+            </div>
+            <p className="text-sm text-gray-500 mt-2">
+              Get your API key from <a href="https://runware.ai" target="_blank" rel="noopener noreferrer" className="text-primary-foreground underline">Runware.ai</a>
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {Object.entries(images).map(([key, url]) => (
+              <div key={key} className="rounded-lg overflow-hidden shadow-lg">
+                <img
+                  src={url}
+                  alt={`AI ${key} visualization`}
+                  className="w-full h-64 object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
