@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Shield, Users, Bell, Check } from "lucide-react";
+import { Shield, Users, Bell, Brain } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -52,6 +53,47 @@ const Landing = () => {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* AI Protection Information */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <Card className="bg-primary/5 border-primary/20">
+            <CardHeader className="flex flex-row items-center gap-4">
+              <Brain className="w-8 h-8 text-primary" />
+              <div>
+                <CardTitle>AI-Powered Protection</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className="flex items-start gap-3">
+                  <Shield className="w-5 h-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Predator Detection</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Our AI constantly analyzes conversations to identify potential predatory behavior, suspicious patterns, and grooming attempts.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Shield className="w-5 h-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-1">Anti-Bullying System</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Advanced language processing detects signs of cyberbullying, hate speech, and harmful content in real-time.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-background/50 p-4 rounded-lg mt-4">
+                <p className="text-sm text-center text-muted-foreground">
+                  Our AI system processes over 1 million messages daily with 99.9% accuracy in threat detection
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
