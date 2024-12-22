@@ -7,7 +7,8 @@ import { AlertsOverview } from "@/components/AlertsOverview";
 import { AddChildForm } from "@/components/AddChildForm";
 import { AddSocialAccount } from "@/components/AddSocialAccount";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { ChevronDown, ChevronUp, Plus } from "lucide-react";
 
 interface Child {
   name: string;
@@ -21,9 +22,11 @@ interface Child {
 const Index = () => {
   const [children, setChildren] = useState<Child[]>([]);
   const [selectedChild, setSelectedChild] = useState<number | null>(null);
+  const [isAddChildOpen, setIsAddChildOpen] = useState(false);
 
-  const handleAddChild = (name: string) => {
-    setChildren([...children, { name, age: 0, socialAccounts: {} }]);
+  const handleAddChild = (name: string, age: number) => {
+    setChildren([...children, { name, age, socialAccounts: {} }]);
+    setIsAddChildOpen(false);
   };
 
   const handleAddSocial = (social: { platform: "instagram" | "tiktok"; username: string }) => {
@@ -51,16 +54,28 @@ const Index = () => {
       <div className="container py-8">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Parent Dashboard</h1>
+          <Dialog open={isAddChildOpen} onOpenChange={setIsAddChildOpen}>
+            <DialogTrigger asChild>
+              <Button className="flex items-center gap-2">
+                <Plus className="h-4 w-4" />
+                Add Child
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Add a New Child</DialogTitle>
+              </DialogHeader>
+              <AddChildForm 
+                onAddChild={handleAddChild} 
+                onCancel={() => setIsAddChildOpen(false)} 
+              />
+            </DialogContent>
+          </Dialog>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Add New Child</h2>
-              <AddChildForm onAddChild={handleAddChild} />
-            </div>
-
-            {children.length > 0 && (
+            {children.length > 0 ? (
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Children</h2>
                 <div className="space-y-6">
@@ -88,6 +103,10 @@ const Index = () => {
                     </div>
                   ))}
                 </div>
+              </div>
+            ) : (
+              <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-8 text-center">
+                <p className="text-gray-500">No children added yet. Click the "Add Child" button to get started.</p>
               </div>
             )}
 
