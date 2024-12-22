@@ -2,72 +2,20 @@ import { Button } from "@/components/ui/button";
 import { Shield, Users, Bell, Brain, Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useState, useEffect } from "react";
-import { RunwareService, GeneratedImage } from "@/services/runware";
-import { toast } from "sonner";
 
 const Landing = () => {
   const navigate = useNavigate();
-  const [apiKey, setApiKey] = useState<string>("");
-  const [images, setImages] = useState<Record<string, string>>({});
-  const [isGenerating, setIsGenerating] = useState(false);
-
-  const generateImages = async () => {
-    if (!apiKey) {
-      toast.error("Please enter your Runware API key");
-      return;
-    }
-
-    setIsGenerating(true);
-    const runwareService = new RunwareService(apiKey);
-
-    const prompts = [
-      {
-        key: "shield",
-        prompt: "A glowing protective shield surrounding digital messages, abstract visualization, clean modern style, blue tones, professional security concept",
-      },
-      {
-        key: "analysis",
-        prompt: "AI analyzing text patterns, abstract data visualization, flowing lines of code being scanned, cybersecurity concept, professional tech illustration",
-      },
-      {
-        key: "safety",
-        prompt: "Safe communication symbols, parent and child silhouettes with protective digital shield, modern minimal style, professional family safety concept",
-      },
-    ];
-
-    try {
-      const generatedImages: Record<string, string> = {};
-      
-      for (const { key, prompt } of prompts) {
-        const result = await runwareService.generateImage({
-          positivePrompt: prompt,
-          model: "runware:100@1",
-          width: 1024,
-          height: 512,
-        });
-        generatedImages[key] = result.imageURL;
-      }
-
-      setImages(generatedImages);
-    } catch (error) {
-      console.error("Error generating images:", error);
-      toast.error("Failed to generate images. Please check your API key and try again.");
-    } finally {
-      setIsGenerating(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <header className="bg-primary py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <header className="bg-primary py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80" />
         <div className="max-w-7xl mx-auto text-center relative z-10">
           <div className="flex justify-center mb-8">
-            <Shield className="w-24 h-24 text-primary-foreground opacity-90" />
+            <Shield className="w-20 h-20 text-primary-foreground opacity-90" />
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold text-primary-foreground mb-8">
+          <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-8">
             Keep Your Children Safe Online
           </h1>
           <p className="text-xl md:text-2xl text-primary-foreground/90 mb-12 max-w-3xl mx-auto">
@@ -76,46 +24,13 @@ const Landing = () => {
           <Button
             size="lg"
             onClick={() => navigate("/dashboard")}
-            className="bg-white text-primary-foreground hover:bg-white/90 h-16 px-12 text-xl"
+            className="bg-white text-primary-foreground hover:bg-white/90 h-14 px-8 text-lg"
           >
-            <Shield className="w-8 h-8 mr-2" />
+            <Shield className="w-6 h-6 mr-2" />
             Get Started
           </Button>
         </div>
       </header>
-
-      {/* API Key Input */}
-      <div className="max-w-xl mx-auto mt-8 p-4">
-        <div className="flex gap-4">
-          <input
-            type="text"
-            placeholder="Enter your Runware API key"
-            value={apiKey}
-            onChange={(e) => setApiKey(e.target.value)}
-            className="flex-1 p-2 border rounded"
-          />
-          <Button 
-            onClick={generateImages}
-            disabled={isGenerating}
-          >
-            {isGenerating ? "Generating..." : "Generate Images"}
-          </Button>
-        </div>
-        <p className="text-sm text-gray-500 mt-2">
-          Get your API key from <a href="https://runware.ai/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">Runware.ai</a>
-        </p>
-      </div>
-
-      {/* Generated Images Display */}
-      {Object.keys(images).length > 0 && (
-        <div className="max-w-7xl mx-auto mt-8 p-4 grid md:grid-cols-3 gap-8">
-          {Object.entries(images).map(([key, url]) => (
-            <div key={key} className="rounded-lg overflow-hidden shadow-lg">
-              <img src={url} alt={key} className="w-full h-64 object-cover" />
-            </div>
-          ))}
-        </div>
-      )}
 
       {/* Features Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
