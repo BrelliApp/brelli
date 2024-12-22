@@ -9,19 +9,24 @@ const Landing = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <header className="bg-primary py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-6">
+      <header className="bg-primary py-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/80" />
+        <div className="max-w-7xl mx-auto text-center relative z-10">
+          <div className="flex justify-center mb-8">
+            <Shield className="w-20 h-20 text-primary-foreground opacity-90" />
+          </div>
+          <h1 className="text-4xl md:text-6xl font-bold text-primary-foreground mb-8">
             Keep Your Children Safe Online
           </h1>
-          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-8">
+          <p className="text-xl md:text-2xl text-primary-foreground/90 mb-12 max-w-3xl mx-auto">
             Monitor social media activity and protect your children from online risks
           </p>
           <Button
             size="lg"
             onClick={() => navigate("/dashboard")}
-            className="bg-white text-primary-foreground hover:bg-white/90"
+            className="bg-white text-primary-foreground hover:bg-white/90 h-14 px-8 text-lg"
           >
+            <Shield className="w-6 h-6 mr-2" />
             Get Started
           </Button>
         </div>
