@@ -6,6 +6,8 @@ import { ActivityLog } from "@/components/ActivityLog";
 import { AlertsOverview } from "@/components/AlertsOverview";
 import { AddChildForm } from "@/components/AddChildForm";
 import { AddSocialAccount } from "@/components/AddSocialAccount";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface Child {
   name: string;
@@ -65,21 +67,24 @@ const Index = () => {
                   {children.map((child, index) => (
                     <div key={index} className="space-y-4">
                       <ChildProfile {...child} />
-                      <div className="flex gap-4">
-                        <Button
-                          variant={selectedChild === index ? "default" : "outline"}
-                          onClick={() => setSelectedChild(index)}
-                          className="w-full"
-                        >
-                          Manage Social Accounts
-                        </Button>
-                      </div>
-                      {selectedChild === index && (
-                        <div className="bg-gray-50 rounded-lg p-6">
-                          <h3 className="text-lg font-semibold text-gray-900 mb-4">Add Social Account</h3>
-                          <AddSocialAccount onAddSocial={handleAddSocial} />
-                        </div>
-                      )}
+                      <Collapsible>
+                        <CollapsibleTrigger asChild>
+                          <Button
+                            variant={selectedChild === index ? "default" : "outline"}
+                            onClick={() => setSelectedChild(index)}
+                            className="w-full flex items-center justify-center gap-2"
+                          >
+                            Manage Social Accounts
+                            {selectedChild === index ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                          </Button>
+                        </CollapsibleTrigger>
+                        <CollapsibleContent>
+                          <div className="bg-gray-50 rounded-lg p-6 mt-4">
+                            <h3 className="text-lg font-semibold text-gray-900 mb-4">Add Social Account</h3>
+                            <AddSocialAccount onAddSocial={handleAddSocial} />
+                          </div>
+                        </CollapsibleContent>
+                      </Collapsible>
                     </div>
                   ))}
                 </div>
