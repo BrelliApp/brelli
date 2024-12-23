@@ -76,7 +76,7 @@ async function exchangeInstagramCode(code: string) {
 async function exchangeTikTokCode(code: string) {
   console.log('Exchanging TikTok code for tokens')
   
-  const response = await fetch('https://open-api.tiktok.com/oauth/access_token/v2/', {
+  const response = await fetch('https://open-api.tiktok.com/oauth/access_token/', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
