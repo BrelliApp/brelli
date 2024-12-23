@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import Index from "./pages/Index";
 import Landing from "./pages/Landing";
+import Auth from "./pages/Auth";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +29,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/auth" replace />;
   }
 
   return <>{children}</>;
@@ -42,6 +43,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Landing />} />
+          <Route path="/auth" element={<Auth />} />
           <Route
             path="/dashboard"
             element={

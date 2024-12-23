@@ -1,57 +1,73 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Auth } from "@supabase/auth-ui-react";
-import { ThemeSupa } from "@supabase/auth-ui-shared";
-import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Shield, Users, Bell } from "lucide-react";
 
 const Landing = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    // Check if user is already logged in
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        navigate("/dashboard");
-      }
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
-  }, [navigate]);
-
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome to Guardler</h1>
-          <p className="text-gray-600 mb-8">
-            Monitor and protect your children's social media activity
-          </p>
+    <div className="min-h-screen bg-gray-50">
+      <header className="bg-white border-b">
+        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-gray-900">Guardler</h1>
+          <div className="space-x-4">
+            <Link to="/auth">
+              <Button variant="outline">Sign In</Button>
+            </Link>
+            <Link to="/auth">
+              <Button>Get Started</Button>
+            </Link>
+          </div>
         </div>
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <Auth
-            supabaseClient={supabase}
-            appearance={{
-              theme: ThemeSupa,
-              variables: {
-                default: {
-                  colors: {
-                    brand: '#2563eb',
-                    brandAccent: '#1d4ed8',
-                  }
-                }
-              },
-              className: {
-                container: 'w-full',
-                button: 'w-full',
-                anchor: 'text-blue-600 hover:text-blue-800',
-              }
-            }}
-            providers={[]}
-          />
-        </div>
-      </div>
+      </header>
+
+      <main>
+        <section className="py-20">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="text-5xl font-bold text-gray-900 mb-6">
+              Protect Your Children Online
+            </h1>
+            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+              Monitor and protect your children's social media activity with our comprehensive parental control solution.
+            </p>
+            <Link to="/auth">
+              <Button size="lg" className="px-8">Start Protecting Today</Button>
+            </Link>
+          </div>
+        </section>
+
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-3 gap-12">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Shield className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Advanced Protection</h3>
+                <p className="text-gray-600">
+                  Real-time monitoring and protection across multiple social platforms.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Bell className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Instant Alerts</h3>
+                <p className="text-gray-600">
+                  Get notified immediately about potentially harmful activities.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Users className="h-8 w-8 text-primary-foreground" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Multiple Children</h3>
+                <p className="text-gray-600">
+                  Manage and protect all your children from a single dashboard.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
