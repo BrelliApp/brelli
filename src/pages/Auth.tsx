@@ -45,9 +45,15 @@ const AuthPage = () => {
                 container: 'w-full',
                 button: 'w-full',
                 anchor: 'text-blue-600 hover:text-blue-800',
+                divider: 'my-4',
+                label: 'text-gray-700',
+                input: 'rounded-md',
+                loader: 'text-blue-600',
+                message: 'text-gray-600 text-sm',
               }
             }}
             providers={["facebook"]}
+            socialLayout="vertical"
           />
         </div>
       </div>
