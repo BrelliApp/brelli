@@ -2,24 +2,13 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ShieldAlert, MessageSquareWarning, Heart, Check } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Header from "@/components/landing/Header";
 
 const Landing = () => {
   return (
     <div className="min-h-screen bg-white">
-      <header className="border-b border-gray-100">
-        <div className="container mx-auto px-4 py-6 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Guardler</h1>
-          <div className="space-x-4">
-            <Link to="/auth">
-              <Button variant="ghost" className="text-gray-600 hover:text-gray-900">Sign In</Button>
-            </Link>
-            <Link to="/auth">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">Get Started</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
+      <Header />
+      
       <main>
         <section className="py-32 bg-gradient-to-b from-gray-50 to-white">
           <div className="container mx-auto px-4 max-w-5xl">
