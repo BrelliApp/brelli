@@ -14,7 +14,7 @@ serve(async (req) => {
 
     switch (platform) {
       case 'instagram':
-        url = `https://api.instagram.com/oauth/authorize?client_id=${Deno.env.get('INSTAGRAM_CLIENT_ID')}&redirect_uri=${REDIRECT_URI}&scope=basic&response_type=code`
+        url = `https://api.instagram.com/oauth/authorize?client_id=${Deno.env.get('INSTAGRAM_CLIENT_ID')}&redirect_uri=${REDIRECT_URI}&scope=user_profile,user_media&response_type=code`
         break
       case 'tiktok':
         url = `https://www.tiktok.com/auth/authorize?client_key=${Deno.env.get('TIKTOK_CLIENT_KEY')}&redirect_uri=${REDIRECT_URI}&scope=user.info.basic&response_type=code`
@@ -26,6 +26,8 @@ serve(async (req) => {
         throw new Error('Invalid platform')
     }
 
+    console.log(`Generated OAuth URL for ${platform}:`, url)
+
     return new Response(
       JSON.stringify({ url }),
       {
@@ -34,6 +36,7 @@ serve(async (req) => {
       },
     )
   } catch (error) {
+    console.error('Error generating OAuth URL:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       {

@@ -26,6 +26,8 @@ serve(async (req) => {
         throw new Error('Invalid platform')
     }
 
+    console.log(`Successfully exchanged ${platform} code for tokens`)
+
     return new Response(
       JSON.stringify(tokens),
       {
@@ -34,6 +36,7 @@ serve(async (req) => {
       },
     )
   } catch (error) {
+    console.error('Error exchanging OAuth code:', error)
     return new Response(
       JSON.stringify({ error: error.message }),
       {
@@ -45,6 +48,8 @@ serve(async (req) => {
 })
 
 async function exchangeInstagramCode(code: string) {
+  console.log('Exchanging Instagram code for tokens')
+  
   const response = await fetch('https://api.instagram.com/oauth/access_token', {
     method: 'POST',
     body: new URLSearchParams({
@@ -57,10 +62,15 @@ async function exchangeInstagramCode(code: string) {
   })
 
   if (!response.ok) {
+    const error = await response.text()
+    console.error('Instagram token exchange failed:', error)
     throw new Error('Failed to exchange Instagram code')
   }
 
-  return response.json()
+  const data = await response.json()
+  console.log('Successfully retrieved Instagram tokens')
+  
+  return data
 }
 
 async function exchangeTikTokCode(code: string) {
