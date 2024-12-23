@@ -9,7 +9,7 @@ const Header = () => {
           <img 
             src="/lovable-uploads/932df905-6d68-470b-ad5a-ca1c810ecc26.png" 
             alt="Brella Logo" 
-            className="h-12 md:h-16" // Keeping the responsive height we just implemented
+            className="h-20 md:h-24" // Significantly increased height for better visibility
           />
         </Link>
         <div className="space-x-4">
