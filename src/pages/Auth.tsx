@@ -47,7 +47,7 @@ const AuthPage = () => {
                 anchor: 'text-blue-600 hover:text-blue-800',
               }
             }}
-            providers={[]}
+            providers={["facebook"]}
           />
         </div>
       </div>
