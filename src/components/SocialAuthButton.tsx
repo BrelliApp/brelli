@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 interface SocialAuthButtonProps {
   platform: "instagram" | "tiktok" | "snapchat";
@@ -19,6 +20,7 @@ interface SocialAuthButtonProps {
 
 export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButtonProps) => {
   const [isConsentOpen, setIsConsentOpen] = useState(false);
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const getPlatformIcon = () => {
     switch (platform) {
@@ -42,15 +44,64 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
     }
   };
 
+  const storeSocialToken = async (socialAccountId: string, tokenData: any) => {
+    try {
+      const { error } = await supabase
+        .from('social_tokens')
+        .insert([{
+          social_account_id: socialAccountId,
+          access_token: tokenData.accessToken,
+          refresh_token: tokenData.refreshToken,
+          expires_at: tokenData.expiresAt ? new Date(tokenData.expiresAt).toISOString() : null
+        }]);
+
+      if (error) throw error;
+    } catch (error: any) {
+      console.error('Error storing social token:', error);
+      throw new Error('Failed to store social media tokens');
+    }
+  };
+
   const handleAuth = async () => {
-    // This is where we would integrate with the actual social media APIs
-    toast.info(`Initiating ${platform} authentication...`);
-    // Simulating auth for now
-    setTimeout(() => {
-      onAuth(platform, { userId: "mock-id", accessToken: "mock-token" });
+    setIsAuthenticating(true);
+    try {
+      // This is where we would integrate with the actual social media APIs
+      toast.info(`Initiating ${platform} authentication...`);
+      
+      // Simulating auth for now with mock data
+      const mockAuthData = {
+        userId: "mock-id",
+        accessToken: "mock-access-token-" + Date.now(),
+        refreshToken: "mock-refresh-token-" + Date.now(),
+        expiresAt: new Date(Date.now() + 3600000).toISOString() // 1 hour from now
+      };
+
+      // First call onAuth to create the social account
+      await onAuth(platform, mockAuthData);
+      
+      // Get the latest social account to store the token
+      const { data: socialAccounts, error: fetchError } = await supabase
+        .from('social_accounts')
+        .select('id')
+        .order('created_at', { ascending: false })
+        .limit(1);
+
+      if (fetchError) throw fetchError;
+      if (!socialAccounts || socialAccounts.length === 0) {
+        throw new Error('Failed to retrieve social account');
+      }
+
+      // Store the tokens
+      await storeSocialToken(socialAccounts[0].id, mockAuthData);
+
       setIsConsentOpen(false);
       toast.success(`Successfully connected to ${platform}`);
-    }, 1000);
+    } catch (error: any) {
+      console.error('Authentication error:', error);
+      toast.error(`Failed to connect to ${platform}: ${error.message}`);
+    } finally {
+      setIsAuthenticating(false);
+    }
   };
 
   return (
@@ -59,7 +110,7 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
         <Button
           variant="outline"
           className={`${getPlatformColor()} text-white border-none`}
-          disabled={disabled}
+          disabled={disabled || isAuthenticating}
         >
           {getPlatformIcon()}
           Connect {platform.charAt(0).toUpperCase() + platform.slice(1)}
@@ -80,11 +131,18 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
           </DialogDescription>
         </DialogHeader>
         <div className="flex justify-end space-x-2 mt-4">
-          <Button variant="outline" onClick={() => setIsConsentOpen(false)}>
+          <Button 
+            variant="outline" 
+            onClick={() => setIsConsentOpen(false)}
+            disabled={isAuthenticating}
+          >
             Cancel
           </Button>
-          <Button onClick={handleAuth}>
-            Authorize Access
+          <Button 
+            onClick={handleAuth}
+            disabled={isAuthenticating}
+          >
+            {isAuthenticating ? 'Authorizing...' : 'Authorize Access'}
           </Button>
         </div>
       </DialogContent>
