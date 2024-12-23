@@ -14,9 +14,10 @@ import { toast } from "sonner";
 interface SocialAuthButtonProps {
   platform: "instagram" | "tiktok" | "snapchat";
   onAuth: (platform: string, authData: any) => void;
+  disabled?: boolean;
 }
 
-export const SocialAuthButton = ({ platform, onAuth }: SocialAuthButtonProps) => {
+export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButtonProps) => {
   const [isConsentOpen, setIsConsentOpen] = useState(false);
 
   const getPlatformIcon = () => {
@@ -58,6 +59,7 @@ export const SocialAuthButton = ({ platform, onAuth }: SocialAuthButtonProps) =>
         <Button
           variant="outline"
           className={`${getPlatformColor()} text-white border-none`}
+          disabled={disabled}
         >
           {getPlatformIcon()}
           Connect {platform.charAt(0).toUpperCase() + platform.slice(1)}

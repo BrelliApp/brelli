@@ -74,9 +74,19 @@ const Index = () => {
 
   const handleAddChild = async (name: string, age: number) => {
     try {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        throw new Error("No authenticated user found");
+      }
+
       const { data, error } = await supabase
         .from('children')
-        .insert([{ name, age }])
+        .insert([{ 
+          name, 
+          age,
+          parent_id: user.id 
+        }])
         .select()
         .single();
 
