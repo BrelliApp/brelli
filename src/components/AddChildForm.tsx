@@ -4,15 +4,16 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
 interface AddChildFormProps {
-  onAddChild: (name: string, age: number) => void;
+  onAddChild: (name: string, age: number) => Promise<void>;
   onCancel: () => void;
 }
 
 export const AddChildForm = ({ onAddChild, onCancel }: AddChildFormProps) => {
   const [firstName, setFirstName] = useState("");
   const [age, setAge] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName.trim()) {
       toast.error("Please enter a first name");
@@ -22,10 +23,17 @@ export const AddChildForm = ({ onAddChild, onCancel }: AddChildFormProps) => {
       toast.error("Please enter a valid age between 0 and 17");
       return;
     }
-    onAddChild(firstName, Number(age));
-    setFirstName("");
-    setAge("");
-    toast.success("Child added successfully");
+
+    setIsSubmitting(true);
+    try {
+      await onAddChild(firstName, Number(age));
+      setFirstName("");
+      setAge("");
+    } catch (error) {
+      // Error is handled in the parent component
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -37,6 +45,7 @@ export const AddChildForm = ({ onAddChild, onCancel }: AddChildFormProps) => {
           onChange={(e) => setFirstName(e.target.value)}
           placeholder="Child's first name"
           className="w-full"
+          disabled={isSubmitting}
         />
       </div>
       <div>
@@ -48,13 +57,16 @@ export const AddChildForm = ({ onAddChild, onCancel }: AddChildFormProps) => {
           min="0"
           max="17"
           className="w-full"
+          disabled={isSubmitting}
         />
       </div>
       <div className="flex justify-end gap-2">
-        <Button type="button" variant="outline" onClick={onCancel}>
+        <Button type="button" variant="outline" onClick={onCancel} disabled={isSubmitting}>
           Cancel
         </Button>
-        <Button type="submit">Add Child</Button>
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Adding..." : "Add Child"}
+        </Button>
       </div>
     </form>
   );

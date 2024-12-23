@@ -9,6 +9,76 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      activity_logs: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          platform: string
+          social_account_id: string
+          type: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          platform: string
+          social_account_id: string
+          type: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          platform?: string
+          social_account_id?: string
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activity_logs_social_account_id_fkey"
+            columns: ["social_account_id"]
+            isOneToOne: false
+            referencedRelation: "social_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      children: {
+        Row: {
+          age: number
+          created_at: string
+          id: string
+          name: string
+          parent_id: string
+          updated_at: string
+        }
+        Insert: {
+          age: number
+          created_at?: string
+          id?: string
+          name: string
+          parent_id: string
+          updated_at?: string
+        }
+        Update: {
+          age?: number
+          created_at?: string
+          id?: string
+          name?: string
+          parent_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "children_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -32,6 +102,41 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      social_accounts: {
+        Row: {
+          child_id: string
+          created_at: string
+          id: string
+          platform: string
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          child_id: string
+          created_at?: string
+          id?: string
+          platform: string
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          child_id?: string
+          created_at?: string
+          id?: string
+          platform?: string
+          updated_at?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "social_accounts_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: false
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

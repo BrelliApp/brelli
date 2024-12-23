@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { ChildProfile } from "@/components/ChildProfile";
@@ -11,8 +11,10 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ChevronDown, ChevronUp, LogOut, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface Child {
+  id: string;
   name: string;
   age: number;
   socialAccounts: {
@@ -24,9 +26,41 @@ interface Child {
 
 const Index = () => {
   const navigate = useNavigate();
-  const [children, setChildren] = useState<Child[]>([]);
-  const [selectedChild, setSelectedChild] = useState<number | null>(null);
+  const queryClient = useQueryClient();
+  const [selectedChild, setSelectedChild] = useState<string | null>(null);
   const [isAddChildOpen, setIsAddChildOpen] = useState(false);
+
+  const { data: children = [], isLoading } = useQuery({
+    queryKey: ['children'],
+    queryFn: async () => {
+      const { data: childrenData, error } = await supabase
+        .from('children')
+        .select(`
+          id,
+          name,
+          age,
+          social_accounts (
+            platform,
+            username
+          )
+        `);
+
+      if (error) {
+        toast.error("Failed to fetch children");
+        throw error;
+      }
+
+      return childrenData.map(child => ({
+        id: child.id,
+        name: child.name,
+        age: child.age,
+        socialAccounts: child.social_accounts?.reduce((acc: any, account: any) => ({
+          ...acc,
+          [account.platform]: account.username
+        }), {})
+      }));
+    }
+  });
 
   const handleSignOut = async () => {
     try {
@@ -38,30 +72,51 @@ const Index = () => {
     }
   };
 
-  const handleAddChild = (name: string, age: number) => {
-    setChildren([...children, { name, age, socialAccounts: {} }]);
-    setIsAddChildOpen(false);
+  const handleAddChild = async (name: string, age: number) => {
+    try {
+      const { data, error } = await supabase
+        .from('children')
+        .insert([{ name, age }])
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      queryClient.invalidateQueries({ queryKey: ['children'] });
+      setIsAddChildOpen(false);
+      toast.success("Child added successfully");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to add child");
+    }
   };
 
-  const handleAddSocial = (social: { platform: "instagram" | "tiktok" | "snapchat"; username: string }) => {
-    if (selectedChild === null) {
+  const handleAddSocial = async (social: { platform: "instagram" | "tiktok" | "snapchat"; username: string }) => {
+    if (!selectedChild) {
       toast.error("Please select a child first");
       return;
     }
 
-    setChildren(children.map((child, index) => {
-      if (index === selectedChild) {
-        return {
-          ...child,
-          socialAccounts: {
-            ...child.socialAccounts,
-            [social.platform]: social.username
-          }
-        };
-      }
-      return child;
-    }));
+    try {
+      const { error } = await supabase
+        .from('social_accounts')
+        .insert([{
+          child_id: selectedChild,
+          platform: social.platform,
+          username: social.username
+        }]);
+
+      if (error) throw error;
+
+      queryClient.invalidateQueries({ queryKey: ['children'] });
+      toast.success(`${social.platform} account connected successfully`);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to add social account");
+    }
   };
+
+  if (isLoading) {
+    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -103,18 +158,18 @@ const Index = () => {
               <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6">
                 <h2 className="text-xl font-semibold text-gray-900 mb-4">Children</h2>
                 <div className="space-y-6">
-                  {children.map((child, index) => (
-                    <div key={index} className="space-y-4">
+                  {children.map((child) => (
+                    <div key={child.id} className="space-y-4">
                       <ChildProfile {...child} />
                       <Collapsible>
                         <CollapsibleTrigger asChild>
                           <Button
-                            variant={selectedChild === index ? "default" : "outline"}
-                            onClick={() => setSelectedChild(index)}
+                            variant={selectedChild === child.id ? "default" : "outline"}
+                            onClick={() => setSelectedChild(child.id)}
                             className="w-full flex items-center justify-center gap-2"
                           >
                             Manage Social Accounts
-                            {selectedChild === index ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                            {selectedChild === child.id ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                           </Button>
                         </CollapsibleTrigger>
                         <CollapsibleContent>
@@ -135,22 +190,7 @@ const Index = () => {
             )}
 
             <ActivityLog
-              activities={[
-                {
-                  id: 1,
-                  type: "alert",
-                  content: "Suspicious activity detected on Instagram",
-                  timestamp: "2 minutes ago",
-                  platform: "Instagram"
-                },
-                {
-                  id: 2,
-                  type: "message",
-                  content: "New direct message received",
-                  timestamp: "5 minutes ago",
-                  platform: "TikTok"
-                }
-              ]}
+              activities={[]} // We'll implement this later
             />
           </div>
           
