@@ -44,58 +44,45 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
     }
   };
 
-  const storeSocialToken = async (socialAccountId: string, tokenData: any) => {
-    try {
-      const { error } = await supabase
-        .from('social_tokens')
-        .insert([{
-          social_account_id: socialAccountId,
-          access_token: tokenData.accessToken,
-          refresh_token: tokenData.refreshToken,
-          expires_at: tokenData.expiresAt ? new Date(tokenData.expiresAt).toISOString() : null
-        }]);
+  const getOAuthUrl = async (platform: string) => {
+    const { data: { url }, error } = await supabase.functions.invoke('get-oauth-url', {
+      body: { platform }
+    });
 
-      if (error) throw error;
-    } catch (error: any) {
-      console.error('Error storing social token:', error);
-      throw new Error('Failed to store social media tokens');
-    }
+    if (error) throw error;
+    return url;
   };
 
   const handleAuth = async () => {
     setIsAuthenticating(true);
     try {
-      // This is where we would integrate with the actual social media APIs
-      toast.info(`Initiating ${platform} authentication...`);
+      const oauthUrl = await getOAuthUrl(platform);
       
-      // Simulating auth for now with mock data
-      const mockAuthData = {
-        userId: "mock-id",
-        accessToken: "mock-access-token-" + Date.now(),
-        refreshToken: "mock-refresh-token-" + Date.now(),
-        expiresAt: new Date(Date.now() + 3600000).toISOString() // 1 hour from now
-      };
-
-      // First call onAuth to create the social account
-      await onAuth(platform, mockAuthData);
+      // Open OAuth popup
+      const popup = window.open(oauthUrl, 'OAuth', 'width=600,height=800');
       
-      // Get the latest social account to store the token
-      const { data: socialAccounts, error: fetchError } = await supabase
-        .from('social_accounts')
-        .select('id')
-        .order('created_at', { ascending: false })
-        .limit(1);
+      // Listen for the OAuth callback
+      window.addEventListener('message', async (event) => {
+        if (event.data?.type === 'oauth_callback') {
+          const { code } = event.data;
+          
+          // Exchange code for tokens
+          const { data: tokens, error } = await supabase.functions.invoke('exchange-oauth-code', {
+            body: { platform, code }
+          });
 
-      if (fetchError) throw fetchError;
-      if (!socialAccounts || socialAccounts.length === 0) {
-        throw new Error('Failed to retrieve social account');
-      }
+          if (error) throw error;
 
-      // Store the tokens
-      await storeSocialToken(socialAccounts[0].id, mockAuthData);
+          // Call onAuth with the token data
+          await onAuth(platform, tokens);
+          setIsConsentOpen(false);
+          toast.success(`Successfully connected to ${platform}`);
+          
+          // Close the popup
+          popup?.close();
+        }
+      }, { once: true });
 
-      setIsConsentOpen(false);
-      toast.success(`Successfully connected to ${platform}`);
     } catch (error: any) {
       console.error('Authentication error:', error);
       toast.error(`Failed to connect to ${platform}: ${error.message}`);
