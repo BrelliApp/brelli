@@ -53,26 +53,36 @@ async function exchangeInstagramCode(code: string) {
   const clientId = Deno.env.get('INSTAGRAM_CLIENT_ID')
   const clientSecret = Deno.env.get('INSTAGRAM_CLIENT_SECRET')
   
-  console.log('Using Instagram credentials:', { clientId, redirectUri: REDIRECT_URI })
+  if (!clientId || !clientSecret) {
+    throw new Error('Instagram credentials are not properly configured')
+  }
+
+  console.log('Instagram Token Exchange Request:', {
+    clientId,
+    redirectUri: REDIRECT_URI,
+    grantType: 'authorization_code'
+  })
   
   const response = await fetch('https://api.instagram.com/oauth/access_token', {
     method: 'POST',
     body: new URLSearchParams({
-      client_id: clientId || '',
-      client_secret: clientSecret || '',
+      client_id: clientId,
+      client_secret: clientSecret,
       grant_type: 'authorization_code',
       redirect_uri: REDIRECT_URI,
       code,
     }),
   })
 
+  const responseText = await response.text()
+  console.log('Instagram API Response:', responseText)
+
   if (!response.ok) {
-    const error = await response.text()
-    console.error('Instagram token exchange failed:', error)
-    throw new Error(`Failed to exchange Instagram code: ${error}`)
+    console.error('Instagram token exchange failed:', responseText)
+    throw new Error(`Failed to exchange Instagram code: ${responseText}`)
   }
 
-  const data = await response.json()
+  const data = JSON.parse(responseText)
   console.log('Successfully retrieved Instagram tokens:', data)
   
   return data

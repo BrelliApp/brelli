@@ -15,7 +15,15 @@ serve(async (req) => {
     switch (platform) {
       case 'instagram':
         const instagramClientId = Deno.env.get('INSTAGRAM_CLIENT_ID')
-        console.log('Using Instagram Client ID:', instagramClientId)
+        console.log('Instagram OAuth URL Generation:', {
+          clientId: instagramClientId,
+          redirectUri: REDIRECT_URI,
+          scope: 'user_profile,user_media'
+        })
+        
+        if (!instagramClientId) {
+          throw new Error('Instagram Client ID is not configured')
+        }
         
         url = `https://api.instagram.com/oauth/authorize?client_id=${instagramClientId}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=user_profile,user_media&response_type=code`
         break
