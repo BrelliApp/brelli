@@ -12,7 +12,7 @@ const Index = () => {
   const [selectedChild, setSelectedChild] = useState<string | null>(null);
   const [isAddChildOpen, setIsAddChildOpen] = useState(false);
 
-  const { data: children = [], isLoading } = useQuery({
+  const { data: children = [], isLoading: isLoadingChildren } = useQuery({
     queryKey: ['children'],
     queryFn: async () => {
       const { data: childrenData, error } = await supabase
@@ -22,6 +22,7 @@ const Index = () => {
           name,
           age,
           social_accounts (
+            id,
             platform,
             username
           )
@@ -42,6 +43,36 @@ const Index = () => {
         }), {})
       }));
     }
+  });
+
+  const { data: activities = [], isLoading: isLoadingActivities } = useQuery({
+    queryKey: ['activities', selectedChild],
+    queryFn: async () => {
+      if (!selectedChild) return [];
+
+      const { data: socialAccounts } = await supabase
+        .from('social_accounts')
+        .select('id, platform')
+        .eq('child_id', selectedChild);
+
+      if (!socialAccounts?.length) return [];
+
+      // Fetch activities for each social account
+      const { data: activities } = await supabase
+        .from('activity_logs')
+        .select('*')
+        .in('social_account_id', socialAccounts.map(acc => acc.id))
+        .order('created_at', { ascending: false });
+
+      return activities?.map(activity => ({
+        id: activity.id,
+        type: activity.type as "message" | "friend_request" | "alert",
+        content: activity.content,
+        timestamp: new Date(activity.created_at).toLocaleString(),
+        platform: activity.platform
+      })) || [];
+    },
+    enabled: !!selectedChild
   });
 
   const handleAddChild = async (name: string, age: number) => {
@@ -79,7 +110,7 @@ const Index = () => {
     }
 
     try {
-      const { error } = await supabase
+      const { error: accountError } = await supabase
         .from('social_accounts')
         .insert([{
           child_id: selectedChild,
@@ -87,16 +118,30 @@ const Index = () => {
           username: social.username
         }]);
 
-      if (error) throw error;
+      if (accountError) throw accountError;
+
+      // If it's Instagram, fetch initial activities
+      if (social.platform === 'instagram') {
+        const { error: fetchError } = await supabase.functions.invoke('fetch-instagram-activity', {
+          body: { socialAccountId: selectedChild }
+        });
+
+        if (fetchError) {
+          console.error('Error fetching Instagram activity:', fetchError);
+          toast.error('Connected account but failed to fetch initial activities');
+          return;
+        }
+      }
 
       queryClient.invalidateQueries({ queryKey: ['children'] });
+      queryClient.invalidateQueries({ queryKey: ['activities'] });
       toast.success(`${social.platform} account connected successfully`);
     } catch (error: any) {
       toast.error(error.message || "Failed to add social account");
     }
   };
 
-  if (isLoading) {
+  if (isLoadingChildren) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
 
@@ -117,7 +162,7 @@ const Index = () => {
               setSelectedChild={setSelectedChild}
               onAddSocial={handleAddSocial}
             />
-            <ActivityLog activities={[]} />
+            <ActivityLog activities={activities} />
           </div>
           
           <div className="space-y-6">

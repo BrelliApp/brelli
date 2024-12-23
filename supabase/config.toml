@@ -1,1 +1,10 @@
 project_id = "dxhdxweardljhgewmals"
+
+[functions.exchange-oauth-code]
+verify_jwt = false
+
+[functions.get-oauth-url]
+verify_jwt = false
+
+[functions.fetch-instagram-activity]
+verify_jwt = true
