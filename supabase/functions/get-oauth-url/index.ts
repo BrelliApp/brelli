@@ -14,10 +14,12 @@ serve(async (req) => {
 
     switch (platform) {
       case 'instagram':
-        url = `https://api.instagram.com/oauth/authorize?client_id=${Deno.env.get('INSTAGRAM_CLIENT_ID')}&redirect_uri=${REDIRECT_URI}&scope=user_profile,user_media&response_type=code`
+        const instagramClientId = Deno.env.get('INSTAGRAM_CLIENT_ID')
+        console.log('Using Instagram Client ID:', instagramClientId)
+        
+        url = `https://api.instagram.com/oauth/authorize?client_id=${instagramClientId}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=user_profile,user_media&response_type=code`
         break
       case 'tiktok':
-        // Use sandbox credentials for TikTok
         url = `https://open-api.tiktok.com/platform/oauth/connect?client_key=${Deno.env.get('TIKTOK_SANDBOX_CLIENT_KEY')}&redirect_uri=${REDIRECT_URI}&scope=user.info.basic&response_type=code&state=tiktok`
         break
       case 'snapchat':
