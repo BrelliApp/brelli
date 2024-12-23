@@ -8,7 +8,9 @@ import { AddChildForm } from "@/components/AddChildForm";
 import { AddSocialAccount } from "@/components/AddSocialAccount";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { ChevronDown, ChevronUp, Plus } from "lucide-react";
+import { ChevronDown, ChevronUp, LogOut, Plus } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
 
 interface Child {
   name: string;
@@ -21,9 +23,20 @@ interface Child {
 }
 
 const Index = () => {
+  const navigate = useNavigate();
   const [children, setChildren] = useState<Child[]>([]);
   const [selectedChild, setSelectedChild] = useState<number | null>(null);
   const [isAddChildOpen, setIsAddChildOpen] = useState(false);
+
+  const handleSignOut = async () => {
+    try {
+      await supabase.auth.signOut();
+      navigate("/");
+      toast.success("Logged out successfully");
+    } catch (error) {
+      toast.error("Error signing out");
+    }
+  };
 
   const handleAddChild = (name: string, age: number) => {
     setChildren([...children, { name, age, socialAccounts: {} }]);
@@ -55,23 +68,33 @@ const Index = () => {
       <div className="container py-8">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Parent Dashboard</h1>
-          <Dialog open={isAddChildOpen} onOpenChange={setIsAddChildOpen}>
-            <DialogTrigger asChild>
-              <Button className="flex items-center gap-2">
-                <Plus className="h-4 w-4" />
-                Add Child
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Add a New Child</DialogTitle>
-              </DialogHeader>
-              <AddChildForm 
-                onAddChild={handleAddChild} 
-                onCancel={() => setIsAddChildOpen(false)} 
-              />
-            </DialogContent>
-          </Dialog>
+          <div className="flex items-center gap-4">
+            <Dialog open={isAddChildOpen} onOpenChange={setIsAddChildOpen}>
+              <DialogTrigger asChild>
+                <Button className="flex items-center gap-2">
+                  <Plus className="h-4 w-4" />
+                  Add Child
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Add a New Child</DialogTitle>
+                </DialogHeader>
+                <AddChildForm 
+                  onAddChild={handleAddChild} 
+                  onCancel={() => setIsAddChildOpen(false)} 
+                />
+              </DialogContent>
+            </Dialog>
+            <Button 
+              variant="outline" 
+              onClick={handleSignOut}
+              className="flex items-center gap-2"
+            >
+              <LogOut className="h-4 w-4" />
+              Sign Out
+            </Button>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
