@@ -7,9 +7,9 @@ const Header = () => {
       <div className="container mx-auto px-4 py-6 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img 
-            src="/lovable-uploads/85386435-d126-4d61-a198-c5f18c09a915.png" 
+            src="/lovable-uploads/932df905-6d68-470b-ad5a-ca1c810ecc26.png" 
             alt="Brella Logo" 
-            className="h-12 md:h-16" // Increased height and made it responsive
+            className="h-12 md:h-16" // Keeping the responsive height we just implemented
           />
         </Link>
         <div className="space-x-4">
