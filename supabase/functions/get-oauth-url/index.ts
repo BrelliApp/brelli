@@ -17,8 +17,8 @@ serve(async (req) => {
         url = `https://api.instagram.com/oauth/authorize?client_id=${Deno.env.get('INSTAGRAM_CLIENT_ID')}&redirect_uri=${REDIRECT_URI}&scope=user_profile,user_media&response_type=code`
         break
       case 'tiktok':
-        // For TikTok sandbox apps, we use a more limited scope
-        url = `https://open-api.tiktok.com/platform/oauth/connect?client_key=${Deno.env.get('TIKTOK_CLIENT_KEY')}&redirect_uri=${REDIRECT_URI}&scope=user.info.basic&response_type=code&state=tiktok`
+        // Use sandbox credentials for TikTok
+        url = `https://open-api.tiktok.com/platform/oauth/connect?client_key=${Deno.env.get('TIKTOK_SANDBOX_CLIENT_KEY')}&redirect_uri=${REDIRECT_URI}&scope=user.info.basic&response_type=code&state=tiktok`
         break
       case 'snapchat':
         url = `https://accounts.snapchat.com/login/oauth2/authorize?client_id=${Deno.env.get('SNAPCHAT_CLIENT_ID')}&redirect_uri=${REDIRECT_URI}&scope=snapchat.user.display_name&response_type=code`

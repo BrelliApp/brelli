@@ -82,8 +82,8 @@ async function exchangeTikTokCode(code: string) {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: new URLSearchParams({
-      client_key: Deno.env.get('TIKTOK_CLIENT_KEY') || '',
-      client_secret: Deno.env.get('TIKTOK_CLIENT_SECRET') || '',
+      client_key: Deno.env.get('TIKTOK_SANDBOX_CLIENT_KEY') || '',
+      client_secret: Deno.env.get('TIKTOK_SANDBOX_CLIENT_SECRET') || '',
       code,
       grant_type: 'authorization_code',
       redirect_uri: REDIRECT_URI,
