@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Users, Bell } from "lucide-react";
+import { Shield, Users, Bell, Brain, Lock, Bot } from "lucide-react";
 
 const Landing = () => {
   return (
@@ -62,6 +62,41 @@ const Landing = () => {
                 <h3 className="text-xl font-semibold mb-4">Multiple Children</h3>
                 <p className="text-gray-600">
                   Manage and protect all your children from a single dashboard.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">Powered by Advanced AI</h2>
+            <div className="grid md:grid-cols-3 gap-12">
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Brain className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Smart Analysis</h3>
+                <p className="text-gray-600">
+                  Our AI analyzes social media content to detect potential risks and inappropriate content.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Lock className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">Privacy First</h3>
+                <p className="text-gray-600">
+                  Advanced encryption and security measures to protect your family's data.
+                </p>
+              </div>
+              <div className="text-center">
+                <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Bot className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold mb-4">24/7 Monitoring</h3>
+                <p className="text-gray-600">
+                  Continuous AI-powered monitoring ensures your children are protected around the clock.
                 </p>
               </div>
             </div>
