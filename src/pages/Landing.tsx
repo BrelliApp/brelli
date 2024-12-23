@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Shield, Users, Bell, Brain, Lock, Bot } from "lucide-react";
+import { Shield, Users, Bell, Brain, Lock, Bot, ShieldAlert, MessageSquareWarning, Heart } from "lucide-react";
 
 const Landing = () => {
   return (
@@ -36,32 +36,33 @@ const Landing = () => {
 
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-12">Keeping Your Kids Safe Online</h2>
             <div className="grid md:grid-cols-3 gap-12">
               <div className="text-center">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Shield className="h-8 w-8 text-primary-foreground" />
+                <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <ShieldAlert className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Advanced Protection</h3>
+                <h3 className="text-xl font-semibold mb-4">Predator Detection</h3>
                 <p className="text-gray-600">
-                  Real-time monitoring and protection across multiple social platforms.
+                  We've got your back! Our AI spots suspicious behavior and potential predators before they can cause harm. No creeps allowed on our watch! 🚫
                 </p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Bell className="h-8 w-8 text-primary-foreground" />
+                <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <MessageSquareWarning className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Instant Alerts</h3>
+                <h3 className="text-xl font-semibold mb-4">Anti-Bullying Shield</h3>
                 <p className="text-gray-600">
-                  Get notified immediately about potentially harmful activities.
+                  Say goodbye to cyberbullying! We detect and block mean messages, hate speech, and harassment. Because everyone deserves to feel safe online. 💪
                 </p>
               </div>
               <div className="text-center">
-                <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Users className="h-8 w-8 text-primary-foreground" />
+                <div className="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Heart className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold mb-4">Multiple Children</h3>
+                <h3 className="text-xl font-semibold mb-4">Support When Needed</h3>
                 <p className="text-gray-600">
-                  Manage and protect all your children from a single dashboard.
+                  We don't just block the bad stuff - we provide resources and support for both parents and kids. Building a safer internet, together! ❤️
                 </p>
               </div>
             </div>
