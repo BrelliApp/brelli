@@ -2,7 +2,7 @@ import { MessageSquare, UserPlus, ShieldAlert } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface Activity {
-  id: number;
+  id: string;  // Changed from number to string to match Supabase's UUID
   type: "message" | "friend_request" | "alert";
   content: string;
   timestamp: string;
