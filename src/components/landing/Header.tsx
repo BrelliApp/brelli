@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 const Header = () => {
   return (
     <header className="border-b border-gray-100">
-      <div className="container mx-auto px-4 py-0 flex justify-between items-center">
-        <Link to="/" className="flex items-center space-x-2 -my-4">
+      <div className="container mx-auto px-4 py-0 flex justify-between items-center h-16">
+        <Link to="/" className="flex items-center space-x-2 -my-12">
           <img 
             src="/lovable-uploads/932df905-6d68-470b-ad5a-ca1c810ecc26.png" 
             alt="Brella Logo" 
