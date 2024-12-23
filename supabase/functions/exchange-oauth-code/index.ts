@@ -74,21 +74,32 @@ async function exchangeInstagramCode(code: string) {
 }
 
 async function exchangeTikTokCode(code: string) {
-  const response = await fetch('https://open-api.tiktok.com/oauth/access_token/', {
+  console.log('Exchanging TikTok code for tokens')
+  
+  const response = await fetch('https://open-api.tiktok.com/oauth/access_token/v2/', {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
     body: new URLSearchParams({
       client_key: Deno.env.get('TIKTOK_CLIENT_KEY') || '',
       client_secret: Deno.env.get('TIKTOK_CLIENT_SECRET') || '',
-      grant_type: 'authorization_code',
       code,
+      grant_type: 'authorization_code',
+      redirect_uri: REDIRECT_URI,
     }),
   })
 
   if (!response.ok) {
+    const error = await response.text()
+    console.error('TikTok token exchange failed:', error)
     throw new Error('Failed to exchange TikTok code')
   }
 
-  return response.json()
+  const data = await response.json()
+  console.log('Successfully retrieved TikTok tokens:', data)
+  
+  return data
 }
 
 async function exchangeSnapchatCode(code: string) {

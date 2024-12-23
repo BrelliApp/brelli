@@ -17,7 +17,8 @@ serve(async (req) => {
         url = `https://api.instagram.com/oauth/authorize?client_id=${Deno.env.get('INSTAGRAM_CLIENT_ID')}&redirect_uri=${REDIRECT_URI}&scope=user_profile,user_media&response_type=code`
         break
       case 'tiktok':
-        url = `https://www.tiktok.com/auth/authorize?client_key=${Deno.env.get('TIKTOK_CLIENT_KEY')}&redirect_uri=${REDIRECT_URI}&scope=user.info.basic&response_type=code`
+        // TikTok requires specific scopes for user data access
+        url = `https://www.tiktok.com/v2/auth/authorize?client_key=${Deno.env.get('TIKTOK_CLIENT_KEY')}&redirect_uri=${REDIRECT_URI}&scope=user.info.basic,video.list&response_type=code&state=tiktok`
         break
       case 'snapchat':
         url = `https://accounts.snapchat.com/login/oauth2/authorize?client_id=${Deno.env.get('SNAPCHAT_CLIENT_ID')}&redirect_uri=${REDIRECT_URI}&scope=snapchat.user.display_name&response_type=code`
