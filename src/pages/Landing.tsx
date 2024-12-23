@@ -21,24 +21,36 @@ const Landing = () => {
   }, [navigate]);
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-sm p-8">
-        <h1 className="text-2xl font-bold text-center mb-8">Welcome to Guardler</h1>
-        <Auth
-          supabaseClient={supabase}
-          appearance={{
-            theme: ThemeSupa,
-            variables: {
-              default: {
-                colors: {
-                  brand: '#2563eb',
-                  brandAccent: '#1d4ed8',
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+      <div className="max-w-md w-full space-y-8">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome to Guardler</h1>
+          <p className="text-gray-600 mb-8">
+            Monitor and protect your children's social media activity
+          </p>
+        </div>
+        <div className="bg-white rounded-lg shadow-sm p-8">
+          <Auth
+            supabaseClient={supabase}
+            appearance={{
+              theme: ThemeSupa,
+              variables: {
+                default: {
+                  colors: {
+                    brand: '#2563eb',
+                    brandAccent: '#1d4ed8',
+                  }
                 }
+              },
+              className: {
+                container: 'w-full',
+                button: 'w-full',
+                anchor: 'text-blue-600 hover:text-blue-800',
               }
-            }
-          }}
-          providers={[]}
-        />
+            }}
+            providers={[]}
+          />
+        </div>
       </div>
     </div>
   );
