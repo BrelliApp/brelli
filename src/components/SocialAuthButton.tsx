@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Instagram, Ghost } from "lucide-react";
+import { Instagram, Ghost, Youtube, Twitter, MessageSquare } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -12,7 +12,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 interface SocialAuthButtonProps {
-  platform: "instagram" | "snapchat";
+  platform: "instagram" | "snapchat" | "tiktok" | "youtube" | "twitter";
   onAuth: (platform: string, authData: any) => void;
   disabled?: boolean;
 }
@@ -27,6 +27,12 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
         return <Instagram className="h-4 w-4 mr-2" />;
       case "snapchat":
         return <Ghost className="h-4 w-4 mr-2" />;
+      case "tiktok":
+        return <MessageSquare className="h-4 w-4 mr-2" />;
+      case "youtube":
+        return <Youtube className="h-4 w-4 mr-2" />;
+      case "twitter":
+        return <Twitter className="h-4 w-4 mr-2" />;
     }
   };
 
@@ -36,6 +42,12 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
         return "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600";
       case "snapchat":
         return "bg-yellow-400 hover:bg-yellow-500 text-black";
+      case "tiktok":
+        return "bg-black hover:bg-gray-800 text-white";
+      case "youtube":
+        return "bg-red-600 hover:bg-red-700 text-white";
+      case "twitter":
+        return "bg-blue-400 hover:bg-blue-500 text-white";
     }
   };
 

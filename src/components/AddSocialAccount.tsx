@@ -3,7 +3,7 @@ import { SocialAuthButton } from "./SocialAuthButton";
 import { toast } from "sonner";
 
 interface SocialAccount {
-  platform: "instagram" | "snapchat";
+  platform: "instagram" | "snapchat" | "tiktok" | "youtube" | "twitter";
   username: string;
 }
 
@@ -18,7 +18,7 @@ export const AddSocialAccount = ({ onAddSocial }: AddSocialAccountProps) => {
     setIsSubmitting(true);
     try {
       await onAddSocial({ 
-        platform: platform as "instagram" | "snapchat", 
+        platform: platform as "instagram" | "snapchat" | "tiktok" | "youtube" | "twitter", 
         username: authData.username
       });
     } catch (error) {
@@ -34,6 +34,9 @@ export const AddSocialAccount = ({ onAddSocial }: AddSocialAccountProps) => {
       <div className="flex flex-wrap gap-2">
         <SocialAuthButton platform="instagram" onAuth={handleSocialAuth} disabled={isSubmitting} />
         <SocialAuthButton platform="snapchat" onAuth={handleSocialAuth} disabled={isSubmitting} />
+        <SocialAuthButton platform="tiktok" onAuth={handleSocialAuth} disabled={isSubmitting} />
+        <SocialAuthButton platform="youtube" onAuth={handleSocialAuth} disabled={isSubmitting} />
+        <SocialAuthButton platform="twitter" onAuth={handleSocialAuth} disabled={isSubmitting} />
       </div>
     </div>
   );

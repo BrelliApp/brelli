@@ -1,4 +1,4 @@
-import { User, Instagram, MessageSquare, Ghost } from "lucide-react";
+import { User, Instagram, MessageSquare, Ghost, Youtube, Twitter } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -9,6 +9,8 @@ interface ChildProfileProps {
     instagram?: string;
     tiktok?: string;
     snapchat?: string;
+    youtube?: string;
+    twitter?: string;
   };
 }
 
@@ -51,6 +53,18 @@ export const ChildProfile = ({ name, age, socialAccounts }: ChildProfileProps) =
             <div className="flex items-center gap-2 bg-yellow-50 px-3 py-2 rounded-full">
               <Ghost className="h-5 w-5 text-yellow-400" />
               <span className="text-sm font-medium text-yellow-700">{socialAccounts.snapchat}</span>
+            </div>
+          )}
+          {socialAccounts.youtube && (
+            <div className="flex items-center gap-2 bg-red-50 px-3 py-2 rounded-full">
+              <Youtube className="h-5 w-5 text-red-600" />
+              <span className="text-sm font-medium text-red-700">{socialAccounts.youtube}</span>
+            </div>
+          )}
+          {socialAccounts.twitter && (
+            <div className="flex items-center gap-2 bg-blue-50 px-3 py-2 rounded-full">
+              <Twitter className="h-5 w-5 text-blue-400" />
+              <span className="text-sm font-medium text-blue-700">{socialAccounts.twitter}</span>
             </div>
           )}
         </div>
