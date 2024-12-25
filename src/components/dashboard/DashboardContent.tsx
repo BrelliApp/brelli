@@ -56,13 +56,38 @@ export const DashboardContent = () => {
     }
 
     try {
-      const { error: accountError } = await supabase
+      // First, check if this child already has an account for this platform
+      const { data: existingAccount, error: fetchError } = await supabase
         .from('social_accounts')
-        .insert([{
-          child_id: selectedChild,
-          platform: social.platform,
-          username: social.username
-        }]);
+        .select('id')
+        .eq('child_id', selectedChild)
+        .eq('platform', social.platform)
+        .maybeSingle();
+
+      if (fetchError) throw fetchError;
+
+      let accountError;
+      
+      if (existingAccount) {
+        // Update existing account
+        const { error: updateError } = await supabase
+          .from('social_accounts')
+          .update({ username: social.username })
+          .eq('id', existingAccount.id);
+        
+        accountError = updateError;
+      } else {
+        // Create new account
+        const { error: insertError } = await supabase
+          .from('social_accounts')
+          .insert([{
+            child_id: selectedChild,
+            platform: social.platform,
+            username: social.username
+          }]);
+        
+        accountError = insertError;
+      }
 
       if (accountError) throw accountError;
 
@@ -80,7 +105,7 @@ export const DashboardContent = () => {
 
       queryClient.invalidateQueries({ queryKey: ['children'] });
       queryClient.invalidateQueries({ queryKey: ['activities'] });
-      toast.success(`${social.platform} account connected successfully`);
+      toast.success(`${social.platform} account ${existingAccount ? 'updated' : 'connected'} successfully`);
     } catch (error: any) {
       toast.error(error.message || "Failed to add social account");
     }
