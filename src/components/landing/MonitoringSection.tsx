@@ -1,9 +1,11 @@
-import { Phone, Shield, Bell, Eye, Sparkles, Heart, MessageCircle, Users, Clock, Lock, BrainCircuit, IceCreamCone, Rocket, Star, Smile, Gift, PartyPopper, Trophy } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import PhoneFrame from "./monitoring/PhoneFrame";
 import ActivityCard from "./monitoring/ActivityCard";
 import FloatingFeature from "./monitoring/FloatingFeature";
 import DecorativeBlob from "./monitoring/DecorativeBlob";
+import FeatureShowcase from "./monitoring/FeatureShowcase";
+import ScrollSection from "./monitoring/ScrollSection";
+import { Shield, Bell, Eye, Sparkles, Heart, MessageCircle, Users, Clock, Lock, BrainCircuit, Trophy, Star, Smile, Gift, PartyPopper } from "lucide-react";
 
 const MonitoringSection = () => {
   return (
@@ -22,7 +24,7 @@ const MonitoringSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
+            className="text-xl text-gray-600 max-w-2xl mx-auto"
           >
             Stay ahead of potential risks while celebrating your child's positive online experiences
           </motion.p>
@@ -69,26 +71,6 @@ const MonitoringSection = () => {
                   delay={1}
                   initialX={-50}
                 />
-
-                <ActivityCard 
-                  icon={Sparkles}
-                  text="Creative content created"
-                  endIcon={Star}
-                  bgColor="bg-blue-100"
-                  textColor="text-blue-700"
-                  delay={1.2}
-                  initialX={-50}
-                />
-
-                <ActivityCard 
-                  icon={Users}
-                  text="Positive peer interactions"
-                  endIcon={Heart}
-                  bgColor="bg-indigo-100"
-                  textColor="text-indigo-700"
-                  delay={1.4}
-                  initialX={-50}
-                />
               </div>
             </div>
           </PhoneFrame>
@@ -133,31 +115,11 @@ const MonitoringSection = () => {
                   delay={1.2}
                   initialX={50}
                 />
-
-                <ActivityCard 
-                  icon={Bell}
-                  text="Early warning system"
-                  endIcon={Clock}
-                  bgColor="bg-amber-100"
-                  textColor="text-amber-700"
-                  delay={1.4}
-                  initialX={50}
-                />
-
-                <ActivityCard 
-                  icon={MessageCircle}
-                  text="Real-time chat analysis"
-                  endIcon={Shield}
-                  bgColor="bg-rose-100"
-                  textColor="text-rose-700"
-                  delay={1.6}
-                  initialX={50}
-                />
               </div>
             </div>
           </PhoneFrame>
 
-          {/* Floating Features with new benefits */}
+          {/* Floating Features */}
           <FloatingFeature 
             icon={Trophy}
             text="Reward System"
@@ -176,16 +138,7 @@ const MonitoringSection = () => {
             delay={1.4}
           />
 
-          <FloatingFeature 
-            icon={Sparkles}
-            text="Smart Learning"
-            position="-left-4 bottom-1/4"
-            iconColor="text-purple-600"
-            initialX={-200}
-            delay={1.6}
-          />
-
-          {/* Enhanced Decorative Elements */}
+          {/* Decorative Elements */}
           <DecorativeBlob 
             color="bg-green-400/20"
             position="top-1/4 -left-32"
@@ -195,53 +148,13 @@ const MonitoringSection = () => {
             position="bottom-1/4 -right-32"
             delay={2}
           />
-          <DecorativeBlob 
-            color="bg-pink-400/20"
-            position="center-1/2 -top-32"
-            delay={1}
-          />
         </div>
 
-        {/* Additional Benefits Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-24 grid md:grid-cols-3 gap-8 text-center"
-        >
-          <div className="p-6 rounded-xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="mb-4"
-            >
-              <Trophy className="h-12 w-12 mx-auto text-green-500" />
-            </motion.div>
-            <h3 className="text-xl font-semibold mb-2">Reward Good Behavior</h3>
-            <p className="text-gray-600">Celebrate positive online interactions and responsible digital citizenship</p>
-          </div>
+        {/* Feature Showcase */}
+        <FeatureShowcase />
 
-          <div className="p-6 rounded-xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="mb-4"
-            >
-              <BrainCircuit className="h-12 w-12 mx-auto text-blue-500" />
-            </motion.div>
-            <h3 className="text-xl font-semibold mb-2">Smart Prevention</h3>
-            <p className="text-gray-600">AI-powered system that learns and adapts to protect your child proactively</p>
-          </div>
-
-          <div className="p-6 rounded-xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="mb-4"
-            >
-              <Heart className="h-12 w-12 mx-auto text-pink-500" />
-            </motion.div>
-            <h3 className="text-xl font-semibold mb-2">Positive Growth</h3>
-            <p className="text-gray-600">Foster healthy online habits while maintaining their independence</p>
-          </div>
-        </motion.div>
+        {/* Scrolling Benefits Section */}
+        <ScrollSection />
       </div>
     </section>
   );
