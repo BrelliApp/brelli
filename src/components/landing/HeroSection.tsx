@@ -1,17 +1,25 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import DecorativeBlob from "./monitoring/DecorativeBlob";
 
 const HeroSection = () => {
   return (
-    <section className="py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent z-10" />
-        <img 
-          src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7" 
-          alt="Parent monitoring child's online activity"
-          className="w-full h-full object-cover object-center"
-        />
-      </div>
+    <section className="py-32 relative overflow-hidden bg-gradient-to-b from-gray-50/50 to-white">
+      {/* Decorative animated blobs */}
+      <DecorativeBlob 
+        color="bg-primary/30"
+        position="-top-32 -left-32"
+      />
+      <DecorativeBlob 
+        color="bg-success/30"
+        position="top-0 right-0"
+        delay={1}
+      />
+      <DecorativeBlob 
+        color="bg-warning/30"
+        position="bottom-0 left-1/4"
+        delay={2}
+      />
       
       <div className="container mx-auto px-4 max-w-5xl relative z-20">
         <div className="text-center mb-16">
