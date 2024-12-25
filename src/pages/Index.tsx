@@ -14,31 +14,31 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 const mockAlerts = [
   {
     id: 1,
-    severity: "high",
+    severity: "high" as const,
     message: "Detected attempt to share personal address in TikTok DM",
     timestamp: "2 minutes ago"
   },
   {
     id: 2,
-    severity: "high",
+    severity: "high" as const,
     message: "Multiple friend requests from adult accounts on Instagram",
     timestamp: "15 minutes ago"
   },
   {
     id: 3,
-    severity: "medium",
+    severity: "medium" as const,
     message: "Unusual pattern of late-night messaging detected",
     timestamp: "1 hour ago"
   },
   {
     id: 4,
-    severity: "medium",
+    severity: "medium" as const,
     message: "Potentially inappropriate image shared in group chat",
     timestamp: "2 hours ago"
   },
   {
     id: 5,
-    severity: "low",
+    severity: "low" as const,
     message: "Increased usage of flagged keywords in conversations",
     timestamp: "3 hours ago"
   }
