@@ -44,6 +44,53 @@ export type Database = {
           },
         ]
       }
+      child_settings: {
+        Row: {
+          child_id: string
+          content_sensitivity: string | null
+          created_at: string
+          flag_images: boolean | null
+          flag_inappropriate_language: boolean | null
+          flag_links: boolean | null
+          flag_meeting_requests: boolean | null
+          id: string
+          screen_time_limit_minutes: number | null
+          updated_at: string
+        }
+        Insert: {
+          child_id: string
+          content_sensitivity?: string | null
+          created_at?: string
+          flag_images?: boolean | null
+          flag_inappropriate_language?: boolean | null
+          flag_links?: boolean | null
+          flag_meeting_requests?: boolean | null
+          id?: string
+          screen_time_limit_minutes?: number | null
+          updated_at?: string
+        }
+        Update: {
+          child_id?: string
+          content_sensitivity?: string | null
+          created_at?: string
+          flag_images?: boolean | null
+          flag_inappropriate_language?: boolean | null
+          flag_links?: boolean | null
+          flag_meeting_requests?: boolean | null
+          id?: string
+          screen_time_limit_minutes?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "child_settings_child_id_fkey"
+            columns: ["child_id"]
+            isOneToOne: true
+            referencedRelation: "children"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       children: {
         Row: {
           age: number
