@@ -9,17 +9,20 @@ interface DecorativeBlobProps {
 const DecorativeBlob = ({ color, position, delay = 0 }: DecorativeBlobProps) => {
   return (
     <motion.div 
+      initial={{ scale: 0.8, opacity: 0 }}
       animate={{ 
-        scale: [1, 1.2, 1],
-        rotate: [0, 10, -10, 0]
+        scale: [0.8, 1.2, 0.9],
+        opacity: [0.4, 0.7, 0.4],
+        rotate: [0, 15, -15, 0]
       }}
       transition={{ 
-        duration: 4,
+        duration: 8,
         repeat: Infinity,
         repeatType: "reverse",
-        delay
+        delay,
+        ease: "easeInOut"
       }}
-      className={`absolute -z-10 w-64 h-64 ${color} rounded-full blur-3xl ${position}`}
+      className={`absolute ${color} rounded-full filter blur-3xl ${position} w-[500px] h-[500px]`}
     />
   );
 };

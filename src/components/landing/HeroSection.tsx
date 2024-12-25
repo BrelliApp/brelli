@@ -7,18 +7,18 @@ const HeroSection = () => {
     <section className="py-32 relative overflow-hidden bg-gradient-to-b from-gray-50/50 to-white">
       {/* Decorative animated blobs */}
       <DecorativeBlob 
-        color="bg-primary/30"
-        position="-top-32 -left-32"
+        color="bg-blue-400/30"
+        position="-top-64 -left-32"
       />
       <DecorativeBlob 
-        color="bg-success/30"
-        position="top-0 right-0"
-        delay={1}
-      />
-      <DecorativeBlob 
-        color="bg-warning/30"
-        position="bottom-0 left-1/4"
+        color="bg-green-400/30"
+        position="-top-32 right-0"
         delay={2}
+      />
+      <DecorativeBlob 
+        color="bg-yellow-400/30"
+        position="bottom-0 left-1/3"
+        delay={4}
       />
       
       <div className="container mx-auto px-4 max-w-5xl relative z-20">
