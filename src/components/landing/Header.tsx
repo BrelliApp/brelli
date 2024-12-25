@@ -7,9 +7,9 @@ const Header = () => {
       <div className="container mx-auto px-4 py-0 flex justify-between items-center h-16">
         <Link to="/" className="flex items-center space-x-2">
           <img 
-            src="/lovable-uploads/be9a8997-cbaa-4154-ac41-dce96076d838.png" 
+            src="/lovable-uploads/6f2d3831-5c77-4de5-8539-3fc416666a37.png" 
             alt="Brelli Logo" 
-            className="h-12 md:h-16" // Reduced from h-32 md:h-36
+            className="h-12 md:h-16" // Keeping the recently adjusted size
           />
         </Link>
         <div className="space-x-4">
