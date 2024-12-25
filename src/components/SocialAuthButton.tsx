@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Instagram, MessageSquare, Ghost } from "lucide-react";
+import { Instagram, Ghost } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -10,10 +10,9 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
 
 interface SocialAuthButtonProps {
-  platform: "instagram" | "tiktok" | "snapchat";
+  platform: "instagram" | "snapchat";
   onAuth: (platform: string, authData: any) => void;
   disabled?: boolean;
 }
@@ -26,8 +25,6 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
     switch (platform) {
       case "instagram":
         return <Instagram className="h-4 w-4 mr-2" />;
-      case "tiktok":
-        return <MessageSquare className="h-4 w-4 mr-2" />;
       case "snapchat":
         return <Ghost className="h-4 w-4 mr-2" />;
     }
@@ -37,52 +34,24 @@ export const SocialAuthButton = ({ platform, onAuth, disabled }: SocialAuthButto
     switch (platform) {
       case "instagram":
         return "bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600";
-      case "tiktok":
-        return "bg-black hover:bg-gray-800";
       case "snapchat":
         return "bg-yellow-400 hover:bg-yellow-500 text-black";
     }
   };
 
-  const getOAuthUrl = async (platform: string) => {
-    const { data: { url }, error } = await supabase.functions.invoke('get-oauth-url', {
-      body: { platform }
-    });
-
-    if (error) throw error;
-    return url;
-  };
-
   const handleAuth = async () => {
     setIsAuthenticating(true);
     try {
-      const oauthUrl = await getOAuthUrl(platform);
+      // Mock successful authentication with random username
+      const mockUsername = `${platform}_user_${Math.random().toString(36).substring(2, 8)}`;
       
-      // Open OAuth popup
-      const popup = window.open(oauthUrl, 'OAuth', 'width=600,height=800');
+      // Simulate API delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
-      // Listen for the OAuth callback
-      window.addEventListener('message', async (event) => {
-        if (event.data?.type === 'oauth_callback') {
-          const { code } = event.data;
-          
-          // Exchange code for tokens
-          const { data: tokens, error } = await supabase.functions.invoke('exchange-oauth-code', {
-            body: { platform, code }
-          });
-
-          if (error) throw error;
-
-          // Call onAuth with the token data
-          await onAuth(platform, tokens);
-          setIsConsentOpen(false);
-          toast.success(`Successfully connected to ${platform}`);
-          
-          // Close the popup
-          popup?.close();
-        }
-      }, { once: true });
-
+      // Call onAuth with mock data
+      await onAuth(platform, { username: mockUsername });
+      setIsConsentOpen(false);
+      toast.success(`Successfully connected to ${platform}`);
     } catch (error: any) {
       console.error('Authentication error:', error);
       toast.error(`Failed to connect to ${platform}: ${error.message}`);
