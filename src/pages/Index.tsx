@@ -42,7 +42,7 @@ const mockAlerts = [
     message: "Increased usage of flagged keywords in conversations",
     timestamp: "3 hours ago"
   }
-] as const;
+];
 
 const Index = () => {
   const queryClient = useQueryClient();
