@@ -6,6 +6,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { ChildrenList } from "@/components/dashboard/ChildrenList";
+import { FlaggedContent } from "@/components/dashboard/FlaggedContent";
+import { WordCloud } from "@/components/dashboard/WordCloud";
 
 const Index = () => {
   const queryClient = useQueryClient();
@@ -57,7 +59,6 @@ const Index = () => {
 
       if (!socialAccounts?.length) return [];
 
-      // Fetch activities for each social account
       const { data: activities } = await supabase
         .from('activity_logs')
         .select('*')
@@ -120,7 +121,6 @@ const Index = () => {
 
       if (accountError) throw accountError;
 
-      // If it's Instagram, fetch initial activities
       if (social.platform === 'instagram') {
         const { error: fetchError } = await supabase.functions.invoke('fetch-instagram-activity', {
           body: { socialAccountId: selectedChild }
@@ -154,19 +154,24 @@ const Index = () => {
           setIsAddChildOpen={setIsAddChildOpen}
         />
         
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-6">
-            <ChildrenList 
-              children={children}
-              selectedChild={selectedChild}
-              setSelectedChild={setSelectedChild}
-              onAddSocial={handleAddSocial}
-            />
-            <ActivityLog activities={activities} />
-          </div>
+        <div className="space-y-8">
+          <FlaggedContent />
           
-          <div className="space-y-6">
-            <AlertsOverview alerts={[]} />
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              <ChildrenList 
+                children={children}
+                selectedChild={selectedChild}
+                setSelectedChild={setSelectedChild}
+                onAddSocial={handleAddSocial}
+              />
+              <ActivityLog activities={activities} />
+            </div>
+            
+            <div className="space-y-6">
+              <AlertsOverview alerts={[]} />
+              <WordCloud />
+            </div>
           </div>
         </div>
       </div>
