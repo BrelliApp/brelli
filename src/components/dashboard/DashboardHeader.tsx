@@ -5,6 +5,7 @@ import { AddChildForm } from "../AddChildForm";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { Logo } from "../shared/Logo";
 
 interface DashboardHeaderProps {
   onAddChild: (name: string, age: number) => Promise<void>;
@@ -27,7 +28,10 @@ export const DashboardHeader = ({ onAddChild, isAddChildOpen, setIsAddChildOpen 
 
   return (
     <div className="flex items-center justify-between mb-8">
-      <h1 className="text-3xl font-bold text-gray-900">Parent Dashboard</h1>
+      <div className="flex items-center gap-4">
+        <Logo className="h-12" linkClassName="-my-2" />
+        <h1 className="text-3xl font-bold text-gray-900">Parent Dashboard</h1>
+      </div>
       <div className="flex items-center gap-4">
         <Dialog open={isAddChildOpen} onOpenChange={setIsAddChildOpen}>
           <DialogTrigger asChild>

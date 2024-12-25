@@ -9,7 +9,7 @@ const Header = () => {
           <img 
             src="/lovable-uploads/932df905-6d68-470b-ad5a-ca1c810ecc26.png" 
             alt="Brella Logo" 
-            className="h-32 md:h-36" // Keeping logo size unchanged
+            className="h-32 md:h-36"
           />
         </Link>
         <div className="space-x-4">
