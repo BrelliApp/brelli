@@ -51,20 +51,6 @@ const ScrollSection = () => {
       />
       
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            Empower Your Family's Digital Journey
-          </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Experience the perfect balance of protection and independence
-          </p>
-        </motion.div>
-
         <div className="grid md:grid-cols-2 gap-8">
           {benefits.map((benefit, index) => (
             <BenefitCard key={index} {...benefit} />
