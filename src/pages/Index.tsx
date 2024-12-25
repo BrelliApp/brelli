@@ -11,6 +11,39 @@ import { WordCloud } from "@/components/dashboard/WordCloud";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
+const mockAlerts = [
+  {
+    id: 1,
+    severity: "high",
+    message: "Detected attempt to share personal address in TikTok DM",
+    timestamp: "2 minutes ago"
+  },
+  {
+    id: 2,
+    severity: "high",
+    message: "Multiple friend requests from adult accounts on Instagram",
+    timestamp: "15 minutes ago"
+  },
+  {
+    id: 3,
+    severity: "medium",
+    message: "Unusual pattern of late-night messaging detected",
+    timestamp: "1 hour ago"
+  },
+  {
+    id: 4,
+    severity: "medium",
+    message: "Potentially inappropriate image shared in group chat",
+    timestamp: "2 hours ago"
+  },
+  {
+    id: 5,
+    severity: "low",
+    message: "Increased usage of flagged keywords in conversations",
+    timestamp: "3 hours ago"
+  }
+] as const;
+
 const Index = () => {
   const queryClient = useQueryClient();
   const [selectedChild, setSelectedChild] = useState<string | null>(null);
@@ -176,7 +209,7 @@ const Index = () => {
               </div>
               
               <div className="space-y-6">
-                <AlertsOverview alerts={[]} />
+                <AlertsOverview alerts={mockAlerts} />
                 <WordCloud />
               </div>
             </div>
