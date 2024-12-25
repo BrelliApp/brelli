@@ -1,5 +1,9 @@
-import { Phone, Shield, Bell, Eye, Sparkles, Heart, MessageCircle, Users, Clock, Lock, BrainCircuit } from "lucide-react";
+import { Phone, Shield, Bell, Eye, Sparkles, Heart, MessageCircle, Users, Clock, Lock, BrainCircuit, IceCreamCone, Rocket, Star } from "lucide-react";
 import { motion } from "framer-motion";
+import PhoneFrame from "./monitoring/PhoneFrame";
+import ActivityCard from "./monitoring/ActivityCard";
+import FloatingFeature from "./monitoring/FloatingFeature";
+import DecorativeBlob from "./monitoring/DecorativeBlob";
 
 const MonitoringSection = () => {
   return (
@@ -10,7 +14,7 @@ const MonitoringSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-3xl font-bold text-gray-900 mb-4"
+            className="text-4xl font-bold text-gray-900 mb-4"
           >
             How Brelli Works
           </motion.h2>
@@ -18,195 +22,169 @@ const MonitoringSection = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed"
           >
             Real-time monitoring and protection for your children's digital life
           </motion.p>
         </div>
 
         <div className="relative flex justify-center items-center min-h-[600px] gap-8">
-          {/* First Phone Frame */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8, x: -100 }}
-            whileInView={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="relative w-[280px] h-[560px] bg-gray-900 rounded-[3rem] p-4 shadow-2xl transform hover:rotate-2 transition-transform duration-300"
-          >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-6 bg-gray-900 rounded-b-3xl" />
-            <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
-              <div className="h-full flex flex-col">
-                <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4">
-                  <div className="flex items-center gap-2">
-                    <Shield className="h-5 w-5" />
-                    <h3 className="text-lg font-semibold">Activity Monitor</h3>
-                  </div>
-                </div>
-                
-                <div className="flex-1 p-4 space-y-4">
-                  <motion.div 
-                    initial={{ x: -50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                    className="flex items-center space-x-3 p-3 bg-success rounded-lg"
-                  >
-                    <Shield className="h-5 w-5 text-success-foreground" />
-                    <span className="text-sm text-success-foreground">Safe browsing detected</span>
-                    <Sparkles className="h-4 w-4 text-success-foreground ml-auto animate-pulse" />
-                  </motion.div>
-                  
-                  <motion.div 
-                    initial={{ x: -50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.8 }}
-                    className="flex items-center space-x-3 p-3 bg-primary rounded-lg"
-                  >
-                    <MessageCircle className="h-5 w-5 text-primary-foreground" />
-                    <span className="text-sm text-primary-foreground">Monitoring messages</span>
-                    <Heart className="h-4 w-4 text-primary-foreground ml-auto animate-bounce" />
-                  </motion.div>
-                  
-                  <motion.div 
-                    initial={{ x: -50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1 }}
-                    className="flex items-center space-x-3 p-3 bg-warning rounded-lg"
-                  >
-                    <Bell className="h-5 w-5 text-warning-foreground" />
-                    <span className="text-sm text-warning-foreground">Screen time alert</span>
-                    <Eye className="h-4 w-4 text-warning-foreground ml-auto animate-pulse" />
-                  </motion.div>
-
-                  <motion.div 
-                    initial={{ x: -50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1.2 }}
-                    className="flex items-center space-x-3 p-3 bg-blue-100 rounded-lg"
-                  >
-                    <Users className="h-5 w-5 text-blue-700" />
-                    <span className="text-sm text-blue-700">New friend request detected</span>
-                    <Shield className="h-4 w-4 text-blue-700 ml-auto animate-pulse" />
-                  </motion.div>
+          {/* Activity Monitor Phone */}
+          <PhoneFrame>
+            <div className="h-full flex flex-col">
+              <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-4">
+                <div className="flex items-center gap-2">
+                  <Shield className="h-5 w-5" />
+                  <h3 className="text-lg font-semibold">Activity Monitor</h3>
                 </div>
               </div>
-            </div>
-          </motion.div>
-
-          {/* Second Phone Frame */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8, x: 100 }}
-            whileInView={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="relative w-[280px] h-[560px] bg-gray-900 rounded-[3rem] p-4 shadow-2xl transform hover:rotate-[-2deg] transition-transform duration-300"
-          >
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-6 bg-gray-900 rounded-b-3xl" />
-            <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
-              <div className="h-full flex flex-col">
-                <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4">
-                  <div className="flex items-center gap-2">
-                    <BrainCircuit className="h-5 w-5" />
-                    <h3 className="text-lg font-semibold">Smart Protection</h3>
-                  </div>
-                </div>
+              
+              <div className="flex-1 p-4 space-y-4">
+                <ActivityCard 
+                  icon={Shield}
+                  text="Safe browsing detected"
+                  endIcon={Sparkles}
+                  bgColor="bg-success"
+                  textColor="text-success-foreground"
+                  delay={0.6}
+                  initialX={-50}
+                />
                 
-                <div className="flex-1 p-4 space-y-4">
-                  <motion.div 
-                    initial={{ x: 50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 0.8 }}
-                    className="flex items-center space-x-3 p-3 bg-purple-100 rounded-lg"
-                  >
-                    <Lock className="h-5 w-5 text-purple-700" />
-                    <span className="text-sm text-purple-700">AI-powered content filtering</span>
-                    <BrainCircuit className="h-4 w-4 text-purple-700 ml-auto animate-pulse" />
-                  </motion.div>
+                <ActivityCard 
+                  icon={MessageCircle}
+                  text="Monitoring messages"
+                  endIcon={Heart}
+                  bgColor="bg-primary"
+                  textColor="text-primary-foreground"
+                  delay={0.8}
+                  initialX={-50}
+                />
+                
+                <ActivityCard 
+                  icon={Bell}
+                  text="Screen time alert"
+                  endIcon={Eye}
+                  bgColor="bg-warning"
+                  textColor="text-warning-foreground"
+                  delay={1}
+                  initialX={-50}
+                />
 
-                  <motion.div 
-                    initial={{ x: 50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1 }}
-                    className="flex items-center space-x-3 p-3 bg-pink-100 rounded-lg"
-                  >
-                    <Clock className="h-5 w-5 text-pink-700" />
-                    <span className="text-sm text-pink-700">Screen time management</span>
-                    <Eye className="h-4 w-4 text-pink-700 ml-auto animate-bounce" />
-                  </motion.div>
+                <ActivityCard 
+                  icon={Users}
+                  text="New friend request detected"
+                  endIcon={Shield}
+                  bgColor="bg-blue-100"
+                  textColor="text-blue-700"
+                  delay={1.2}
+                  initialX={-50}
+                />
 
-                  <motion.div 
-                    initial={{ x: 50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1.2 }}
-                    className="flex items-center space-x-3 p-3 bg-green-100 rounded-lg"
-                  >
-                    <MessageCircle className="h-5 w-5 text-green-700" />
-                    <span className="text-sm text-green-700">Cyberbullying detection</span>
-                    <Shield className="h-4 w-4 text-green-700 ml-auto animate-pulse" />
-                  </motion.div>
-
-                  <motion.div 
-                    initial={{ x: 50, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    transition={{ duration: 0.5, delay: 1.4 }}
-                    className="flex items-center space-x-3 p-3 bg-orange-100 rounded-lg"
-                  >
-                    <Users className="h-5 w-5 text-orange-700" />
-                    <span className="text-sm text-orange-700">Contact monitoring</span>
-                    <Heart className="h-4 w-4 text-orange-700 ml-auto animate-bounce" />
-                  </motion.div>
-                </div>
+                <ActivityCard 
+                  icon={IceCreamCone}
+                  text="Reward earned: Good behavior!"
+                  endIcon={Star}
+                  bgColor="bg-pink-100"
+                  textColor="text-pink-700"
+                  delay={1.4}
+                  initialX={-50}
+                />
               </div>
             </div>
-          </motion.div>
+          </PhoneFrame>
+
+          {/* Smart Protection Phone */}
+          <PhoneFrame initialX={100} delay={0.6} rotate={-2}>
+            <div className="h-full flex flex-col">
+              <div className="bg-gradient-to-r from-purple-500 to-purple-600 text-white p-4">
+                <div className="flex items-center gap-2">
+                  <BrainCircuit className="h-5 w-5" />
+                  <h3 className="text-lg font-semibold">Smart Protection</h3>
+                </div>
+              </div>
+              
+              <div className="flex-1 p-4 space-y-4">
+                <ActivityCard 
+                  icon={Lock}
+                  text="AI-powered content filtering"
+                  endIcon={BrainCircuit}
+                  bgColor="bg-purple-100"
+                  textColor="text-purple-700"
+                  delay={0.8}
+                  initialX={50}
+                />
+
+                <ActivityCard 
+                  icon={Clock}
+                  text="Screen time management"
+                  endIcon={Eye}
+                  bgColor="bg-pink-100"
+                  textColor="text-pink-700"
+                  delay={1}
+                  initialX={50}
+                />
+
+                <ActivityCard 
+                  icon={MessageCircle}
+                  text="Cyberbullying detection"
+                  endIcon={Shield}
+                  bgColor="bg-green-100"
+                  textColor="text-green-700"
+                  delay={1.2}
+                  initialX={50}
+                />
+
+                <ActivityCard 
+                  icon={Users}
+                  text="Contact monitoring"
+                  endIcon={Heart}
+                  bgColor="bg-orange-100"
+                  textColor="text-orange-700"
+                  delay={1.4}
+                  initialX={50}
+                />
+
+                <ActivityCard 
+                  icon={Rocket}
+                  text="Learning progress tracked"
+                  endIcon={Star}
+                  bgColor="bg-blue-100"
+                  textColor="text-blue-700"
+                  delay={1.6}
+                  initialX={50}
+                />
+              </div>
+            </div>
+          </PhoneFrame>
 
           {/* Floating Features */}
-          <motion.div 
-            initial={{ x: -200, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            className="absolute -left-4 top-1/4 bg-white p-4 rounded-lg shadow-lg transform -translate-x-full hover:scale-105 transition-transform duration-300"
-          >
-            <div className="flex items-center space-x-2">
-              <Shield className="h-6 w-6 text-success-foreground" />
-              <span className="text-sm font-medium">Real-time Protection</span>
-            </div>
-          </motion.div>
+          <FloatingFeature 
+            icon={Shield}
+            text="Real-time Protection"
+            position="-left-4 top-1/4"
+            iconColor="text-success-foreground"
+            initialX={-200}
+            delay={1.2}
+          />
 
-          <motion.div 
-            initial={{ x: 200, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1.4 }}
-            className="absolute -right-4 top-1/2 bg-white p-4 rounded-lg shadow-lg transform translate-x-full hover:scale-105 transition-transform duration-300"
-          >
-            <div className="flex items-center space-x-2">
-              <BrainCircuit className="h-6 w-6 text-purple-600" />
-              <span className="text-sm font-medium">AI-Powered Safety</span>
-            </div>
-          </motion.div>
+          <FloatingFeature 
+            icon={BrainCircuit}
+            text="AI-Powered Safety"
+            position="-right-4 top-1/2"
+            iconColor="text-purple-600"
+            initialX={200}
+            delay={1.4}
+          />
 
           {/* Decorative Elements */}
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, 10, -10, 0]
-            }}
-            transition={{ 
-              duration: 4,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-            className="absolute -z-10 w-64 h-64 bg-success/20 rounded-full blur-3xl top-1/4 -left-32"
+          <DecorativeBlob 
+            color="bg-success/20"
+            position="top-1/4 -left-32"
           />
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              rotate: [0, -10, 10, 0]
-            }}
-            transition={{ 
-              duration: 4,
-              repeat: Infinity,
-              repeatType: "reverse",
-              delay: 2
-            }}
-            className="absolute -z-10 w-64 h-64 bg-purple-400/20 rounded-full blur-3xl bottom-1/4 -right-32"
+          <DecorativeBlob 
+            color="bg-purple-400/20"
+            position="bottom-1/4 -right-32"
+            delay={2}
           />
         </div>
       </div>
