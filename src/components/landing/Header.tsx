@@ -5,11 +5,11 @@ const Header = () => {
   return (
     <header className="border-b border-gray-100">
       <div className="container mx-auto px-4 py-0 flex justify-between items-center h-16">
-        <Link to="/" className="flex items-center space-x-2 -my-12">
+        <Link to="/" className="flex items-center space-x-2">
           <img 
             src="/lovable-uploads/be9a8997-cbaa-4154-ac41-dce96076d838.png" 
             alt="Brelli Logo" 
-            className="h-32 md:h-36"
+            className="h-12 md:h-16" // Reduced from h-32 md:h-36
           />
         </Link>
         <div className="space-x-4">
