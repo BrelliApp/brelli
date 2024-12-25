@@ -70,6 +70,31 @@ const Index = () => {
         throw error;
       }
 
+      // If no data from database, return mock data for development
+      if (!childrenData || childrenData.length === 0) {
+        return [
+          {
+            id: "1",
+            name: "Emma",
+            age: 14,
+            socialAccounts: {
+              instagram: "emma.social",
+              tiktok: "emma_dances",
+              snapchat: "emma.snaps"
+            }
+          },
+          {
+            id: "2",
+            name: "Lucas",
+            age: 16,
+            socialAccounts: {
+              instagram: "lucas.gram",
+              tiktok: "lucas_gaming"
+            }
+          }
+        ];
+      }
+
       return childrenData.map(child => ({
         id: child.id,
         name: child.name,
