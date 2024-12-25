@@ -99,10 +99,12 @@ const Index = () => {
         id: child.id,
         name: child.name,
         age: child.age,
-        socialAccounts: child.social_accounts?.reduce((acc: any, account: any) => ({
-          ...acc,
-          [account.platform]: account.username
-        }), {})
+        socialAccounts: child.social_accounts?.reduce((acc, account) => {
+          if (account.platform && account.username) {
+            acc[account.platform] = account.username;
+          }
+          return acc;
+        }, {} as Record<string, string>)
       }));
     }
   });
