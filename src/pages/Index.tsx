@@ -4,10 +4,12 @@ import { ActivityLog } from "@/components/ActivityLog";
 import { AlertsOverview } from "@/components/AlertsOverview";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
+import { Logo } from "@/components/shared/Logo";
 import { ChildrenList } from "@/components/dashboard/ChildrenList";
 import { FlaggedContent } from "@/components/dashboard/FlaggedContent";
 import { WordCloud } from "@/components/dashboard/WordCloud";
+import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 const Index = () => {
   const queryClient = useQueryClient();
@@ -146,36 +148,42 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container py-8">
-        <DashboardHeader 
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full bg-gray-50">
+        <DashboardSidebar 
           onAddChild={handleAddChild}
           isAddChildOpen={isAddChildOpen}
           setIsAddChildOpen={setIsAddChildOpen}
         />
         
-        <div className="space-y-8">
-          <FlaggedContent />
+        <div className="flex-1 p-8">
+          <div className="mb-8">
+            <Logo className="h-12" linkClassName="-my-2" />
+          </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
-              <ChildrenList 
-                children={children}
-                selectedChild={selectedChild}
-                setSelectedChild={setSelectedChild}
-                onAddSocial={handleAddSocial}
-              />
-              <ActivityLog activities={activities} />
-            </div>
+          <div className="space-y-8">
+            <FlaggedContent />
             
-            <div className="space-y-6">
-              <AlertsOverview alerts={[]} />
-              <WordCloud />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2 space-y-6">
+                <ChildrenList 
+                  children={children}
+                  selectedChild={selectedChild}
+                  setSelectedChild={setSelectedChild}
+                  onAddSocial={handleAddSocial}
+                />
+                <ActivityLog activities={activities} />
+              </div>
+              
+              <div className="space-y-6">
+                <AlertsOverview alerts={[]} />
+                <WordCloud />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
 };
 
