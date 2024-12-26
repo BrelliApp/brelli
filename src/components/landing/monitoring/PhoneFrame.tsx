@@ -21,7 +21,7 @@ const PhoneFrame = ({ children, initialX = -100, delay = 0.4, rotate = 2 }: Phon
       <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/50 to-purple-500/50 rounded-[3rem] blur-lg" />
       
       {/* Main phone frame */}
-      <div className={`relative w-[280px] h-[560px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-[3rem] p-4 shadow-2xl transform hover:rotate-${rotate} transition-all duration-300 hover:scale-105`}>
+      <div className={`relative w-[320px] h-[640px] bg-gradient-to-br from-gray-900 to-gray-800 rounded-[3rem] p-4 shadow-2xl transform hover:rotate-${rotate} transition-all duration-300 hover:scale-105`}>
         {/* Camera notch */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-6 bg-black rounded-b-3xl overflow-hidden">
           <div className="absolute top-1 left-1/2 -translate-x-1/2 w-16 h-3 bg-gray-900 rounded-full flex items-center justify-center">
@@ -32,7 +32,7 @@ const PhoneFrame = ({ children, initialX = -100, delay = 0.4, rotate = 2 }: Phon
         {/* Screen content */}
         <div className="relative w-full h-full bg-white rounded-[2.5rem] overflow-hidden shadow-inner">
           {/* Status bar */}
-          <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-r from-gray-100 to-gray-50 flex items-center justify-between px-6 text-xs text-gray-600">
+          <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-r from-gray-100 to-gray-50 flex items-center justify-between px-6 text-xs text-gray-600 z-10">
             <span>9:41</span>
             <div className="flex items-center gap-1">
               <div className="w-4 h-2 bg-gray-600 rounded-sm" />
