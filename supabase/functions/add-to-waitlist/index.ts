@@ -44,7 +44,7 @@ const handler = async (req: Request): Promise<Response> => {
           Authorization: `Bearer ${RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: "Safe Social Watcher <notifications@yourdomain.com>", // Replace yourdomain.com with your verified domain
+          from: "Safe Social Watcher <simon@brelli.se>",
           to: [email],
           subject: "Welcome to Safe Social Watcher Waitlist",
           html: `
