@@ -21,10 +21,33 @@ const handler = async (req: Request): Promise<Response> => {
   try {
     const { email }: WaitlistRequest = await req.json();
     
-    console.log("Attempting to send email to:", email);
+    console.log("Attempting to process waitlist signup for:", email);
     
     if (!RESEND_API_KEY) {
       throw new Error("RESEND_API_KEY is not configured");
+    }
+
+    // First, add the contact to Resend audience
+    console.log("Adding contact to Resend audience...");
+    const audienceRes = await fetch("https://api.resend.com/audiences/7d0e63b9-45c7-4824-a5a2-c468e2b5a73c/contacts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        email,
+        first_name: email.split('@')[0], // Use part before @ as first name
+        subscribed: true,
+      }),
+    });
+
+    if (!audienceRes.ok) {
+      const audienceError = await audienceRes.text();
+      console.error("Failed to add contact to Resend audience:", audienceError);
+      // We'll continue with the welcome email even if audience addition fails
+    } else {
+      console.log("Successfully added to Resend audience");
     }
 
     // In test mode, we'll still record the waitlist signup but only attempt to send
@@ -37,7 +60,8 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Only attempt to send email if we're not in test mode or if the recipient is verified
     if (!isTestMode || email === verifiedTestEmail) {
-      const res = await fetch("https://api.resend.com/emails", {
+      console.log("Sending welcome email...");
+      const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -87,10 +111,10 @@ const handler = async (req: Request): Promise<Response> => {
         }),
       });
 
-      const resData = await res.json();
+      const resData = await emailRes.json();
       console.log("Resend API response:", resData);
 
-      if (!res.ok) {
+      if (!emailRes.ok) {
         console.error("Resend API error:", resData);
         // Don't throw error, still return success if signup was recorded
       }
@@ -107,7 +131,7 @@ const handler = async (req: Request): Promise<Response> => {
         status: 200,
       }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error in add-to-waitlist function:", error);
     return new Response(
       JSON.stringify({ error: error.message }), 
