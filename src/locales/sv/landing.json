@@ -4,6 +4,10 @@
     "description": "Följ och skydda dina barns aktivitet på sociala medier med Brelli, vår kraftfulla och användarvänliga lösning för digitalt skydd.",
     "joinWaitlist": "Anmäl dig till väntlistan"
   },
+  "monitoring": {
+    "title": "Proaktivt skydd med Brelli",
+    "description": "föregå potentiella risker samtidigt som du uppmuntrar ditt barns positiva upplevelser på nätet"
+  },
   "features": {
     "title": "Håll dina barn säkra på nätet",
     "subtitle": "Vår avancerade AI-teknik arbetar dygnet runt för att skydda dina barn från hot på nätet",

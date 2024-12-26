@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import PhoneFrame from "./monitoring/PhoneFrame";
 import FloatingFeature from "./monitoring/FloatingFeature";
 import DecorativeBlob from "./monitoring/DecorativeBlob";
@@ -9,6 +10,8 @@ import PositiveExperiencesPhone from "./monitoring/PositiveExperiencesPhone";
 import ProtectionStatusPhone from "./monitoring/ProtectionStatusPhone";
 
 const MonitoringSection = () => {
+  const { t } = useTranslation('landing');
+
   return (
     <section className="py-24 bg-gradient-to-b from-primary to-blue-50 overflow-hidden">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -19,7 +22,7 @@ const MonitoringSection = () => {
             transition={{ duration: 0.5 }}
             className="text-4xl font-bold text-gray-900 mb-4"
           >
-            Proactive Protection with Brelli
+            {t('monitoring.title')}
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -27,7 +30,7 @@ const MonitoringSection = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-xl text-gray-600 max-w-2xl mx-auto"
           >
-            Stay ahead of potential risks while celebrating your child's positive online experiences
+            {t('monitoring.description')}
           </motion.p>
         </div>
 
