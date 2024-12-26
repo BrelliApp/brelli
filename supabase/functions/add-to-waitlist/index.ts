@@ -29,7 +29,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // First, add the contact to Resend audience
     console.log("Adding contact to Resend audience...");
-    const audienceRes = await fetch("https://api.resend.com/audiences/b0a3f0c4-e7c4-4f3c-9f8e-c468e2b5a73c/contacts", {
+    const audienceRes = await fetch("https://api.resend.com/audiences/2aeca00c-7eff-454d-929c-308100d46358/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
