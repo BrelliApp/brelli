@@ -31,8 +31,8 @@ const PhoneFrame = ({ children, initialX = -100, delay = 0.4, rotate = 2 }: Phon
         
         {/* Screen content */}
         <div className="relative w-full h-full bg-white rounded-[2.5rem] overflow-hidden shadow-inner">
-          {/* Status bar */}
-          <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-r from-gray-100 to-gray-50 flex items-center justify-between px-6 text-xs text-gray-600 z-10">
+          {/* Status bar - Now positioned absolutely with proper z-index */}
+          <div className="absolute top-0 left-0 right-0 h-6 bg-gradient-to-r from-gray-100/95 to-gray-50/95 backdrop-blur-sm flex items-center justify-between px-6 text-xs text-gray-600 z-50">
             <span>9:41</span>
             <div className="flex items-center gap-1">
               <div className="w-4 h-2 bg-gray-600 rounded-sm" />
@@ -40,7 +40,10 @@ const PhoneFrame = ({ children, initialX = -100, delay = 0.4, rotate = 2 }: Phon
             </div>
           </div>
           
-          {children}
+          {/* Content wrapper with padding to avoid status bar overlap */}
+          <div className="h-full pt-6">
+            {children}
+          </div>
           
           {/* Home indicator */}
           <div className="absolute bottom-1 left-1/2 -translate-x-1/2 w-32 h-1 bg-gray-300 rounded-full" />
