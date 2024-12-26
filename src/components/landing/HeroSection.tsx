@@ -31,7 +31,7 @@ const HeroSection = () => {
           </p>
           <Link to="/auth">
             <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-6 text-lg">
-              Start Protecting Today
+              Join our waitlist
             </Button>
           </Link>
         </div>
