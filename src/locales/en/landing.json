@@ -1,12 +1,15 @@
 {
+  "banner": {
+    "title": "Next generation security for social media"
+  },
   "hero": {
     "title": "Protect Your Children Online",
-    "description": "Monitor and protect your children's social media activity with our comprehensive parental control solution.",
-    "joinWaitlist": "Join our waitlist"
+    "description": "Monitor and protect your children's social media activity with Brelli, our powerful and user-friendly digital safety solution.",
+    "joinWaitlist": "Join the Waitlist"
   },
   "monitoring": {
     "title": "Proactive Protection with Brelli",
-    "description": "Stay ahead of potential risks while celebrating your child's positive online experiences"
+    "description": "Stay ahead of potential risks while encouraging your child's positive online experiences"
   },
   "features": {
     "title": "Keeping Your Kids Safe Online",
@@ -25,11 +28,15 @@
     }
   },
   "waitlist": {
-    "title": "Join Our Waitlist",
-    "description": "Be among the first to experience our innovative parental control solution. Sign up now for early access and exclusive updates.",
+    "title": "Join the Waitlist",
+    "description": "Be among the first to experience Brelli and our innovative social media parental controls. Sign up now for early access and exclusive updates",
     "emailPlaceholder": "Enter your email",
-    "joinButton": "Join Waitlist",
+    "joinButton": "Submit",
     "joining": "Joining...",
     "alreadyJoined": "Join hundreds of parents already on our waitlist"
+  },
+  "language": {
+    "en": "English",
+    "sv": "Swedish"
   }
 }
