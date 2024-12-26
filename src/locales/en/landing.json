@@ -1,0 +1,31 @@
+{
+  "hero": {
+    "title": "Protect Your Children Online",
+    "description": "Monitor and protect your children's social media activity with our comprehensive parental control solution.",
+    "joinWaitlist": "Join our waitlist"
+  },
+  "features": {
+    "title": "Keeping Your Kids Safe Online",
+    "subtitle": "Our advanced AI technology works 24/7 to protect your children from online threats",
+    "predatorDetection": {
+      "title": "Predator Detection",
+      "description": "Our AI spots suspicious behavior and potential predators before they can cause harm. No creeps allowed on our watch! 🚫"
+    },
+    "antiBullying": {
+      "title": "Anti-Bullying Shield",
+      "description": "We detect and block mean messages, hate speech, and harassment. Because everyone deserves to feel safe online. 💪"
+    },
+    "support": {
+      "title": "Support When Needed",
+      "description": "We provide resources and support for both parents and kids. Building a safer internet, together! ❤️"
+    }
+  },
+  "waitlist": {
+    "title": "Join Our Waitlist",
+    "description": "Be among the first to experience our innovative parental control solution. Sign up now for early access and exclusive updates.",
+    "emailPlaceholder": "Enter your email",
+    "joinButton": "Join Waitlist",
+    "joining": "Joining...",
+    "alreadyJoined": "Join hundreds of parents already on our waitlist"
+  }
+}

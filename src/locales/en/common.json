@@ -1,0 +1,10 @@
+{
+  "navigation": {
+    "signIn": "Sign In",
+    "getStarted": "Get Started"
+  },
+  "language": {
+    "en": "English",
+    "sv": "Swedish"
+  }
+}
