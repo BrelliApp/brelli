@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Trophy } from "lucide-react";
 import { useChildren } from "@/hooks/useChildren";
 import { useAchievements } from "@/hooks/useAchievements";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
@@ -6,6 +7,7 @@ import { Logo } from "@/components/shared/Logo";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AchievementsList } from "@/components/achievements/AchievementsList";
 import { AddAchievementForm } from "@/components/achievements/AddAchievementForm";
+import { Button } from "@/components/ui/button";
 
 const Achievements = () => {
   const [selectedChild, setSelectedChild] = useState<string | null>(null);
@@ -19,7 +21,7 @@ const Achievements = () => {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-gray-50">
+      <div className="min-h-screen flex w-full bg-gradient-to-br from-blue-50 to-indigo-50">
         <DashboardSidebar />
         
         <div className="flex-1 p-8">
@@ -28,35 +30,45 @@ const Achievements = () => {
           </div>
           
           <div className="space-y-8">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold">Achievements</h1>
-              <select
-                className="px-4 py-2 border rounded-md"
-                value={selectedChild || ""}
-                onChange={(e) => setSelectedChild(e.target.value || null)}
-              >
-                <option value="">Select a child</option>
-                {children.map((child) => (
-                  <option key={child.id} value={child.id}>
-                    {child.name}
-                  </option>
-                ))}
-              </select>
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-6 rounded-lg shadow-sm">
+              <div className="flex items-center gap-3">
+                <Trophy className="h-8 w-8 text-yellow-500" />
+                <h1 className="text-3xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                  Achievements & Goals
+                </h1>
+              </div>
+              
+              <div className="flex items-center gap-4">
+                <select
+                  className="px-4 py-2 border rounded-md bg-white shadow-sm focus:ring-2 focus:ring-indigo-200 focus:border-indigo-400 transition-all"
+                  value={selectedChild || ""}
+                  onChange={(e) => setSelectedChild(e.target.value || null)}
+                >
+                  <option value="">Select a child</option>
+                  {children.map((child) => (
+                    <option key={child.id} value={child.id}>
+                      {child.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {selectedChild ? (
               <div className="space-y-6">
                 <div className="flex justify-end">
-                  <button
+                  <Button
                     onClick={() => setIsAddAchievementOpen(true)}
-                    className="bg-primary text-white px-4 py-2 rounded-md hover:bg-primary/90 transition-colors"
+                    className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 text-white shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5"
                   >
-                    Add Achievement
-                  </button>
+                    Add New Achievement
+                  </Button>
                 </div>
 
                 {isLoadingAchievements ? (
-                  <div>Loading achievements...</div>
+                  <div className="flex items-center justify-center p-12">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-500"></div>
+                  </div>
                 ) : (
                   <AchievementsList achievements={achievements} />
                 )}
@@ -68,8 +80,11 @@ const Achievements = () => {
                 />
               </div>
             ) : (
-              <div className="text-center py-12 text-gray-500">
-                Please select a child to view and manage their achievements
+              <div className="text-center py-12 bg-white rounded-lg shadow-sm">
+                <Trophy className="h-16 w-16 text-gray-300 mx-auto mb-4" />
+                <p className="text-gray-500 text-lg">
+                  Please select a child to view and manage their achievements
+                </p>
               </div>
             )}
           </div>
