@@ -1,13 +1,16 @@
 import { ShieldAlert, MessageSquareWarning, Heart } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const FeaturesSection = () => {
+  const { t } = useTranslation('landing');
+
   return (
     <section className="py-24">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Keeping Your Kids Safe Online</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">{t('features.title')}</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Our advanced AI technology works 24/7 to protect your children from online threats
+            {t('features.subtitle')}
           </p>
         </div>
         
@@ -19,9 +22,9 @@ const FeaturesSection = () => {
               </div>
             </div>
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Predator Detection</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">{t('features.predatorDetection.title')}</h3>
               <p className="text-gray-600 leading-relaxed">
-                Our AI spots suspicious behavior and potential predators before they can cause harm. No creeps allowed on our watch! 🚫
+                {t('features.predatorDetection.description')}
               </p>
             </div>
           </div>
@@ -33,9 +36,9 @@ const FeaturesSection = () => {
               </div>
             </div>
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Anti-Bullying Shield</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">{t('features.antiBullying.title')}</h3>
               <p className="text-gray-600 leading-relaxed">
-                We detect and block mean messages, hate speech, and harassment. Because everyone deserves to feel safe online. 💪
+                {t('features.antiBullying.description')}
               </p>
             </div>
           </div>
@@ -47,9 +50,9 @@ const FeaturesSection = () => {
               </div>
             </div>
             <div className="text-center">
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Support When Needed</h3>
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">{t('features.support.title')}</h3>
               <p className="text-gray-600 leading-relaxed">
-                We provide resources and support for both parents and kids. Building a safer internet, together! ❤️
+                {t('features.support.description')}
               </p>
             </div>
           </div>
