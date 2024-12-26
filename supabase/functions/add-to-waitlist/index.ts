@@ -44,9 +44,9 @@ const handler = async (req: Request): Promise<Response> => {
           Authorization: `Bearer ${RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: "Safe Social Watcher <simon@brelli.se>",
+          from: "Brelli <simon@brelli.se>",
           to: [email],
-          subject: "Welcome to Safe Social Watcher!",
+          subject: "Welcome to Brelli!",
           html: `
             <!DOCTYPE html>
             <html>
@@ -63,11 +63,11 @@ const handler = async (req: Request): Promise<Response> => {
               <body>
                 <div class="container">
                   <div class="header">
-                    <h1>Welcome to Safe Social Watcher!</h1>
+                    <h1>Welcome to Brelli!</h1>
                   </div>
                   <div class="content">
                     <p>Thank you for joining our waitlist! We're excited to have you on board.</p>
-                    <p>Safe Social Watcher is revolutionizing how parents protect and guide their children in the digital world. As a waitlist member, you'll be among the first to:</p>
+                    <p>Brelli is revolutionizing how parents protect and guide their children in the digital world. As a waitlist member, you'll be among the first to:</p>
                     <ul>
                       <li>Get early access to our platform</li>
                       <li>Receive exclusive updates about our launch</li>
@@ -77,8 +77,8 @@ const handler = async (req: Request): Promise<Response> => {
                     <p>In the meantime, if you have any questions, feel free to reply to this email.</p>
                   </div>
                   <div class="footer">
-                    <p>Best regards,<br>The Safe Social Watcher Team</p>
-                    <small>You're receiving this email because you signed up for the Safe Social Watcher waitlist.</small>
+                    <p>Best regards,<br>The Brelli Team</p>
+                    <small>You're receiving this email because you signed up for the Brelli waitlist.</small>
                   </div>
                 </div>
               </body>
