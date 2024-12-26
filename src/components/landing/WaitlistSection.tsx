@@ -65,7 +65,7 @@ const WaitlistSection = () => {
             type="submit" 
             disabled={isLoading} 
             size="lg" 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 text-xl"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-12 h-16 text-xl"
           >
             {isLoading ? "Joining..." : "Join Waitlist"}
           </Button>
