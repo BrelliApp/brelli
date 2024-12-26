@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, Trophy } from "lucide-react";
+import { Calendar } from "lucide-react";
 import { format } from "date-fns";
 import { useAchievements } from "@/hooks/useAchievements";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -47,14 +47,11 @@ export const AddAchievementForm = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent>
         <DialogHeader>
-          <div className="flex items-center gap-3">
-            <Trophy className="h-6 w-6 text-indigo-500" />
-            <DialogTitle className="text-xl">Add New Achievement</DialogTitle>
-          </div>
+          <DialogTitle>Add New Achievement</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="title">Title</Label>
             <Input
@@ -62,7 +59,6 @@ export const AddAchievementForm = ({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter achievement title"
-              className="focus:ring-2 focus:ring-indigo-200"
             />
           </div>
           
@@ -73,7 +69,6 @@ export const AddAchievementForm = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Enter achievement description"
-              className="focus:ring-2 focus:ring-indigo-200"
             />
           </div>
           
@@ -111,11 +106,7 @@ export const AddAchievementForm = ({
             >
               Cancel
             </Button>
-            <Button 
-              type="submit" 
-              disabled={createAchievement.isPending}
-              className="bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600"
-            >
+            <Button type="submit" disabled={createAchievement.isPending}>
               {createAchievement.isPending ? "Adding..." : "Add Achievement"}
             </Button>
           </div>
