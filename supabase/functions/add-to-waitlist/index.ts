@@ -46,11 +46,43 @@ const handler = async (req: Request): Promise<Response> => {
         body: JSON.stringify({
           from: "Safe Social Watcher <simon@brelli.se>",
           to: [email],
-          subject: "Welcome to Safe Social Watcher Waitlist",
+          subject: "Welcome to Safe Social Watcher!",
           html: `
-            <h1>Welcome to Safe Social Watcher!</h1>
-            <p>Thank you for joining our waitlist. We'll keep you updated on our launch and early access opportunities.</p>
-            <p>Best regards,<br>The Safe Social Watcher Team</p>
+            <!DOCTYPE html>
+            <html>
+              <head>
+                <style>
+                  body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                  .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                  .header { background-color: #4F46E5; color: white; padding: 20px; text-align: center; border-radius: 8px; }
+                  .content { padding: 20px 0; }
+                  .footer { text-align: center; padding-top: 20px; color: #666; font-size: 14px; }
+                  .button { display: inline-block; padding: 12px 24px; background-color: #4F46E5; color: white; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+                </style>
+              </head>
+              <body>
+                <div class="container">
+                  <div class="header">
+                    <h1>Welcome to Safe Social Watcher!</h1>
+                  </div>
+                  <div class="content">
+                    <p>Thank you for joining our waitlist! We're excited to have you on board.</p>
+                    <p>Safe Social Watcher is revolutionizing how parents protect and guide their children in the digital world. As a waitlist member, you'll be among the first to:</p>
+                    <ul>
+                      <li>Get early access to our platform</li>
+                      <li>Receive exclusive updates about our launch</li>
+                      <li>Help shape the future of digital parenting</li>
+                    </ul>
+                    <p>We'll keep you updated on our progress and let you know as soon as we're ready to launch.</p>
+                    <p>In the meantime, if you have any questions, feel free to reply to this email.</p>
+                  </div>
+                  <div class="footer">
+                    <p>Best regards,<br>The Safe Social Watcher Team</p>
+                    <small>You're receiving this email because you signed up for the Safe Social Watcher waitlist.</small>
+                  </div>
+                </div>
+              </body>
+            </html>
           `,
         }),
       });
