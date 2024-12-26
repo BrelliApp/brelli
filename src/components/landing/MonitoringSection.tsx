@@ -4,7 +4,7 @@ import FloatingFeature from "./monitoring/FloatingFeature";
 import DecorativeBlob from "./monitoring/DecorativeBlob";
 import FeatureShowcase from "./monitoring/FeatureShowcase";
 import ScrollSection from "./monitoring/ScrollSection";
-import { Trophy, Heart, Star, Gift, PartyPopper, Smile } from "lucide-react";
+import { Trophy, ShieldCheck, Star, ShieldAlert, Bell, AlertTriangle, Shield } from "lucide-react";
 import PositiveExperiencesPhone from "./monitoring/PositiveExperiencesPhone";
 import ProtectionStatusPhone from "./monitoring/ProtectionStatusPhone";
 
@@ -42,60 +42,60 @@ const MonitoringSection = () => {
             <ProtectionStatusPhone />
           </PhoneFrame>
 
-          {/* Floating Features with playful positioning */}
+          {/* Security-oriented Floating Features */}
           <FloatingFeature 
-            icon={Trophy}
-            text="Achievement Rewards"
+            icon={ShieldCheck}
+            text="Real-time Protection"
             position="-left-8 top-1/4"
-            iconColor="text-yellow-600"
+            iconColor="text-green-600"
             initialX={-200}
             delay={1.2}
             rotate={-3}
           />
 
           <FloatingFeature 
-            icon={Heart}
-            text="Positive Reinforcement"
+            icon={ShieldAlert}
+            text="Threat Detection"
             position="-right-8 top-1/2"
-            iconColor="text-pink-600"
+            iconColor="text-red-600"
             initialX={200}
             delay={1.4}
             rotate={2}
           />
 
           <FloatingFeature 
-            icon={Star}
-            text="Daily Challenges"
+            icon={Bell}
+            text="Instant Alerts"
             position="left-1/4 -top-8"
-            iconColor="text-purple-600"
+            iconColor="text-blue-600"
             initialX={-150}
             delay={1.6}
             rotate={-2}
           />
 
           <FloatingFeature 
-            icon={Gift}
-            text="Digital Rewards"
+            icon={AlertTriangle}
+            text="Risk Prevention"
             position="right-1/4 bottom-0"
-            iconColor="text-blue-600"
+            iconColor="text-yellow-600"
             initialX={150}
             delay={1.8}
             rotate={3}
           />
 
           <FloatingFeature 
-            icon={PartyPopper}
-            text="Milestone Celebrations"
+            icon={Shield}
+            text="Privacy Guard"
             position="-left-4 bottom-1/4"
-            iconColor="text-green-600"
+            iconColor="text-purple-600"
             initialX={-180}
             delay={2.0}
             rotate={-4}
           />
 
           <FloatingFeature 
-            icon={Smile}
-            text="Behavior Recognition"
+            icon={Star}
+            text="Safe Browsing"
             position="right-0 top-1/4"
             iconColor="text-orange-600"
             initialX={220}
