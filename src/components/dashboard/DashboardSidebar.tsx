@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LogOut, Plus, Settings, LayoutDashboard } from "lucide-react";
+import { LogOut, Plus, Settings, LayoutDashboard, Award } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AddChildForm } from "../AddChildForm";
 import { toast } from "sonner";
@@ -53,6 +53,16 @@ export function DashboardSidebar({
                 >
                   <LayoutDashboard className="h-4 w-4" />
                   <span>Dashboard</span>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+              <SidebarMenuItem>
+                <SidebarMenuButton 
+                  onClick={() => navigate("/achievements")}
+                  tooltip="Achievements"
+                >
+                  <Award className="h-4 w-4" />
+                  <span>Achievements</span>
                 </SidebarMenuButton>
               </SidebarMenuItem>
 

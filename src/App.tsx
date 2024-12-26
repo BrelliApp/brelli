@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
 import Settings from "./pages/Settings";
+import Achievements from "./pages/Achievements";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,14 @@ const App = () => (
             element={
               <ProtectedRoute>
                 <Settings />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/achievements"
+            element={
+              <ProtectedRoute>
+                <Achievements />
               </ProtectedRoute>
             }
           />
