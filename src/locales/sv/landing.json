@@ -31,5 +31,9 @@
     "joinButton": "Gå med i väntelistan",
     "joining": "Går med...",
     "alreadyJoined": "Gå med hundratals föräldrar som redan är på vår väntelista"
+  },
+  "language": {
+    "en": "Engelska",
+    "sv": "Svenska"
   }
 }
