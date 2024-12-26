@@ -29,7 +29,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // First, add the contact to Resend audience
     console.log("Adding contact to Resend audience...");
-    const audienceRes = await fetch("https://api.resend.com/audiences/7d0e63b9-45c7-4824-a5a2-c468e2b5a73c/contacts", {
+    const audienceRes = await fetch("https://api.resend.com/audiences/b0a3f0c4-e7c4-4f3c-9f8e-c468e2b5a73c/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,13 +38,15 @@ const handler = async (req: Request): Promise<Response> => {
       body: JSON.stringify({
         email,
         first_name: email.split('@')[0], // Use part before @ as first name
-        subscribed: true,
+        unsubscribed: false,
       }),
     });
 
+    const audienceData = await audienceRes.json();
+    console.log("Resend audience response:", audienceData);
+
     if (!audienceRes.ok) {
-      const audienceError = await audienceRes.text();
-      console.error("Failed to add contact to Resend audience:", audienceError);
+      console.error("Failed to add contact to Resend audience:", audienceData);
       // We'll continue with the welcome email even if audience addition fails
     } else {
       console.log("Successfully added to Resend audience");
