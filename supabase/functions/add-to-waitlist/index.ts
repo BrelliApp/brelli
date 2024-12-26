@@ -29,7 +29,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // In test mode, we'll still record the waitlist signup but only attempt to send
     // confirmation emails to verified addresses
-    const isTestMode = true; // Set this to false after domain verification
+    const isTestMode = false; // We're setting this to false since domain is verified
     const verifiedTestEmail = "simon.ekstrand90@gmail.com"; // Your verified email
 
     // Record waitlist signup success regardless of email sending
@@ -44,7 +44,7 @@ const handler = async (req: Request): Promise<Response> => {
           Authorization: `Bearer ${RESEND_API_KEY}`,
         },
         body: JSON.stringify({
-          from: "Safe Social Watcher <onboarding@resend.dev>",
+          from: "Safe Social Watcher <notifications@yourdomain.com>", // Replace yourdomain.com with your verified domain
           to: [email],
           subject: "Welcome to Safe Social Watcher Waitlist",
           html: `
