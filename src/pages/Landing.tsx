@@ -11,8 +11,8 @@ const Landing = () => {
       <main>
         <HeroSection />
         <MonitoringSection />
-        <FeaturesSection />
         <WaitlistSection />
+        <FeaturesSection />
       </main>
     </div>
   );
