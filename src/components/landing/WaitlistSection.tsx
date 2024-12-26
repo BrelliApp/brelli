@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { supabase } from "@/integrations/supabase/client";
 
 const WaitlistSection = () => {
   const [email, setEmail] = useState("");
@@ -13,24 +14,16 @@ const WaitlistSection = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(
-        "https://dxhdxweardljhgewmals.supabase.co/functions/v1/add-to-waitlist",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email }),
-        }
-      );
+      const { error } = await supabase.functions.invoke('add-to-waitlist', {
+        body: { email }
+      });
 
-      if (!response.ok) {
-        throw new Error("Failed to join waitlist");
-      }
+      if (error) throw error;
 
       toast.success("Successfully joined the waitlist!");
       setEmail("");
-    } catch (error) {
+    } catch (error: any) {
+      console.error('Waitlist error:', error);
       toast.error("Failed to join waitlist. Please try again.");
     } finally {
       setIsLoading(false);
