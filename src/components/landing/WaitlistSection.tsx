@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { supabase } from "@/integrations/supabase/client";
+import { useTranslation } from "react-i18next";
 
 const WaitlistSection = () => {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation('landing');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,10 +41,10 @@ const WaitlistSection = () => {
           transition={{ duration: 0.5 }}
         >
           <h2 className="text-5xl font-bold text-gray-900 mb-8">
-            Join Our Waitlist
+            {t('waitlist.title')}
           </h2>
           <p className="text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
-            Be among the first to experience our innovative parental control solution. Sign up now for early access and exclusive updates.
+            {t('waitlist.description')}
           </p>
         </motion.div>
 
@@ -55,7 +57,7 @@ const WaitlistSection = () => {
         >
           <Input
             type="email"
-            placeholder="Enter your email"
+            placeholder={t('waitlist.emailPlaceholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -67,7 +69,7 @@ const WaitlistSection = () => {
             size="lg" 
             className="bg-blue-600 hover:bg-blue-700 text-white px-12 h-16 text-xl"
           >
-            {isLoading ? "Joining..." : "Join Waitlist"}
+            {isLoading ? t('waitlist.joining') : t('waitlist.joinButton')}
           </Button>
         </motion.form>
 
@@ -77,7 +79,7 @@ const WaitlistSection = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          Join hundreds of parents already on our waitlist
+          {t('waitlist.alreadyJoined')}
         </motion.p>
       </div>
 
