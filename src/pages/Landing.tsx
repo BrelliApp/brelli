@@ -8,8 +8,8 @@ import WaitlistSection from "@/components/landing/WaitlistSection";
 const Landing = () => {
   return (
     <div className="min-h-screen bg-white">
-      <Banner />
       <Header />
+      <Banner />
       <main>
         <HeroSection />
         <MonitoringSection />
