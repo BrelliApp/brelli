@@ -38,17 +38,17 @@ const WaitlistSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-5xl font-bold text-gray-900 mb-8">
             Join Our Waitlist
           </h2>
-          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+          <p className="text-2xl text-gray-600 mb-12 max-w-2xl mx-auto">
             Be among the first to experience our innovative parental control solution. Sign up now for early access and exclusive updates.
           </p>
         </motion.div>
 
         <motion.form
           onSubmit={handleSubmit}
-          className="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto"
+          className="flex flex-col sm:flex-row gap-6 max-w-xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
@@ -59,20 +59,20 @@ const WaitlistSection = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="flex-1"
+            className="flex-1 h-16 text-lg px-6"
           />
           <Button 
             type="submit" 
             disabled={isLoading} 
             size="lg" 
-            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-base"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-12 py-5 text-xl"
           >
             {isLoading ? "Joining..." : "Join Waitlist"}
           </Button>
         </motion.form>
 
         <motion.p
-          className="mt-6 text-sm text-gray-500"
+          className="mt-8 text-base text-gray-500"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }}
