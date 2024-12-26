@@ -111,6 +111,10 @@ export const DashboardContent = () => {
     }
   };
 
+  const handleChildUpdate = () => {
+    queryClient.invalidateQueries({ queryKey: ['children'] });
+  };
+
   if (isLoadingChildren) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
@@ -126,6 +130,7 @@ export const DashboardContent = () => {
             selectedChild={selectedChild}
             setSelectedChild={setSelectedChild}
             onAddSocial={handleAddSocial}
+            onChildUpdate={handleChildUpdate}
           />
           <ActivityLog activities={activities} />
         </div>
