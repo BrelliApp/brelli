@@ -61,7 +61,12 @@ const WaitlistSection = () => {
             required
             className="flex-1"
           />
-          <Button type="submit" disabled={isLoading} size="lg" className="bg-blue-600 hover:bg-blue-700">
+          <Button 
+            type="submit" 
+            disabled={isLoading} 
+            size="lg" 
+            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-base"
+          >
             {isLoading ? "Joining..." : "Join Waitlist"}
           </Button>
         </motion.form>
