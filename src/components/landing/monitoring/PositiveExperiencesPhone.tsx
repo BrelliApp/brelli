@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Bell, MessageSquare, AlertTriangle, Shield, Clock, Users, Hash } from "lucide-react";
+import { Bell, Music, Youtube, MessageSquare, Instagram, AlertTriangle } from "lucide-react";
+
 import ActivityCard from "./ActivityCard";
 
 const PositiveExperiencesPhone = () => {
@@ -20,58 +21,58 @@ const PositiveExperiencesPhone = () => {
         />
         <div className="flex items-center gap-2">
           <Bell className="h-5 w-5" />
-          <h3 className="text-lg font-semibold">Recent Activities</h3>
+          <h3 className="text-lg font-semibold">Activity Feed</h3>
         </div>
         <div className="mt-2 text-sm text-white/80">Real-time monitoring</div>
       </div>
       
       <div className="flex-1 p-4 space-y-3 bg-gray-50 overflow-y-auto">
         <ActivityCard
-          icon={MessageSquare}
-          text="New message detected on Instagram"
-          endIcon={Clock}
-          bgColor="bg-white"
-          textColor="text-blue-600"
+          icon={Music}
+          username="annabanana1203"
+          platform="annabanana1203@mail.com"
+          alertType="Drug/Alcohol-Related Content"
+          timestamp="2:40pm • Apr. 29"
           delay={0.2}
           initialX={-20}
         />
         
         <ActivityCard
-          icon={AlertTriangle}
-          text="Potential cyberbullying detected"
-          endIcon={Shield}
-          bgColor="bg-red-50"
-          textColor="text-red-600"
+          icon={Youtube}
+          username="Annie"
+          platform="annderoo22"
+          alertType="Violence"
+          timestamp="2:40pm • Apr. 29"
           delay={0.4}
           initialX={-20}
         />
         
         <ActivityCard
-          icon={Users}
-          text="New follower request on TikTok"
-          endIcon={Clock}
-          bgColor="bg-white"
-          textColor="text-purple-600"
+          icon={MessageSquare}
+          username="Annie"
+          platform="annderoo22"
+          alertType="Risky app / Site usage"
+          timestamp="2:40pm • Apr. 29"
           delay={0.6}
           initialX={-20}
         />
         
         <ActivityCard
-          icon={Hash}
-          text="Trending hashtag interaction"
-          endIcon={Clock}
-          bgColor="bg-white"
-          textColor="text-green-600"
+          icon={AlertTriangle}
+          username="Annie"
+          platform="annie_smith_1824"
+          alertType="Cyberbullying"
+          timestamp="2:40pm • Apr. 29"
           delay={0.8}
           initialX={-20}
         />
         
         <ActivityCard
-          icon={Shield}
-          text="Content filtered: inappropriate link"
-          endIcon={Clock}
-          bgColor="bg-yellow-50"
-          textColor="text-yellow-700"
+          icon={Instagram}
+          username="Annie"
+          platform="annie_was_here"
+          alertType="Sexual Content"
+          timestamp="2:40pm • Apr. 29"
           delay={1.0}
           initialX={-20}
         />
