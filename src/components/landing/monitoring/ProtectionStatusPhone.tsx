@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { AlertTriangle, MessageSquare, Instagram, Youtube, Music } from "lucide-react";
+import { AlertTriangle, MessageSquare, Instagram, Youtube, Music, TwitchIcon } from "lucide-react";
 import ActivityCard from "./ActivityCard";
 
 const ProtectionStatusPhone = () => {
   return (
     <div className="h-full flex flex-col">
-      <div className="bg-gradient-to-r from-red-500 to-red-600 text-white p-4 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-red-500 to-red-600 text-white p-6 relative overflow-hidden">
         <motion.div 
           className="absolute inset-0 bg-white/10"
           animate={{
@@ -18,20 +18,22 @@ const ProtectionStatusPhone = () => {
             ease: "linear"
           }}
         />
-        <div className="flex items-center gap-2">
-          <AlertTriangle className="h-5 w-5" />
-          <h3 className="text-lg font-semibold">High Priority</h3>
+        <div className="flex items-center gap-3">
+          <AlertTriangle className="h-6 w-6" />
+          <div>
+            <h3 className="text-xl font-semibold">High Priority</h3>
+            <div className="mt-1 text-sm text-white/90">Critical alerts requiring attention</div>
+          </div>
         </div>
-        <div className="mt-2 text-sm text-white/80">Critical alerts</div>
       </div>
       
-      <div className="flex-1 p-4 space-y-3 bg-gray-50 overflow-y-auto">
+      <div className="flex-1 p-4 space-y-4 bg-gray-50/80 overflow-y-auto">
         <ActivityCard
           icon={Youtube}
           username="Annie"
-          platform="annderoo22"
+          platform="YouTube"
           alertType="Violence"
-          timestamp="2:40pm • Apr. 29"
+          timestamp="2:40pm"
           delay={0.2}
           initialX={20}
         />
@@ -39,9 +41,9 @@ const ProtectionStatusPhone = () => {
         <ActivityCard
           icon={MessageSquare}
           username="Annie"
-          platform="annie_smith_1824"
+          platform="Messages"
           alertType="Cyberbullying"
-          timestamp="2:40pm • Apr. 29"
+          timestamp="2:35pm"
           delay={0.4}
           initialX={20}
         />
@@ -49,9 +51,9 @@ const ProtectionStatusPhone = () => {
         <ActivityCard
           icon={Instagram}
           username="Annie"
-          platform="annie_was_here"
+          platform="Instagram"
           alertType="Sexual Content"
-          timestamp="2:40pm • Apr. 29"
+          timestamp="2:30pm"
           delay={0.6}
           initialX={20}
         />
@@ -59,19 +61,19 @@ const ProtectionStatusPhone = () => {
         <ActivityCard
           icon={Music}
           username="Annie"
-          platform="annabanana1203"
+          platform="TikTok"
           alertType="Drug/Alcohol-Related Content"
-          timestamp="2:40pm • Apr. 29"
+          timestamp="2:25pm"
           delay={0.8}
           initialX={20}
         />
         
         <ActivityCard
-          icon={AlertTriangle}
+          icon={TwitchIcon}
           username="Annie"
-          platform="annderoo22"
+          platform="Twitch"
           alertType="Risky app / Site usage"
-          timestamp="12:23pm • Apr. 28"
+          timestamp="2:20pm"
           delay={1.0}
           initialX={20}
           isNew={false}

@@ -5,8 +5,7 @@ import FloatingFeature from "./monitoring/FloatingFeature";
 import DecorativeBlob from "./monitoring/DecorativeBlob";
 import FeatureShowcase from "./monitoring/FeatureShowcase";
 import ScrollSection from "./monitoring/ScrollSection";
-import { Trophy, ShieldCheck, Star, ShieldAlert, Bell, AlertTriangle, Shield } from "lucide-react";
-import PositiveExperiencesPhone from "./monitoring/PositiveExperiencesPhone";
+import { ShieldCheck, Star, ShieldAlert, Bell, AlertTriangle, Shield } from "lucide-react";
 import ProtectionStatusPhone from "./monitoring/ProtectionStatusPhone";
 
 const MonitoringSection = () => {
@@ -34,14 +33,9 @@ const MonitoringSection = () => {
           </motion.p>
         </div>
 
-        <div className="relative flex justify-center items-center min-h-[700px] gap-12 px-8">
-          {/* Positive Experiences Phone */}
-          <PhoneFrame>
-            <PositiveExperiencesPhone />
-          </PhoneFrame>
-
-          {/* Proactive Protection Phone */}
-          <PhoneFrame initialX={100} delay={0.6} rotate={-2}>
+        <div className="relative flex justify-center items-center min-h-[700px] px-8">
+          {/* Enhanced Protection Status Phone */}
+          <PhoneFrame initialX={0} delay={0.4} rotate={0}>
             <ProtectionStatusPhone />
           </PhoneFrame>
 
@@ -108,11 +102,11 @@ const MonitoringSection = () => {
 
           {/* Decorative Blobs */}
           <DecorativeBlob 
-            color="bg-green-400/20"
+            color="bg-blue-400/20"
             position="top-1/4 -left-32"
           />
           <DecorativeBlob 
-            color="bg-blue-400/20"
+            color="bg-green-400/20"
             position="bottom-1/4 -right-32"
             delay={2}
           />
