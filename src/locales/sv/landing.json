@@ -27,6 +27,20 @@
       "description": "Vi tillhandahåller resurser och stöd för både föräldrar och barn. Vi bygger ett säkrare internet tillsammans! ❤️"
     }
   },
+  "featureShowcase": {
+    "smartProtection": {
+      "title": "Smart skydd",
+      "description": "Avancerade AI-algoritmer som anpassar sig för att skydda ditt barn i realtid"
+    },
+    "positiveGrowth": {
+      "title": "Positiv utveckling",
+      "description": "Främja hälsosamma onlinevanor samtidigt som självständigheten bevaras"
+    },
+    "familyConnection": {
+      "title": "Familjeanknytning",
+      "description": "Håll kontakten och bygg förtroende genom öppen kommunikation"
+    }
+  },
   "waitlist": {
     "title": "Anmäl dig till väntlistan",
     "description": "Var bland de första att uppleva Brelli och vår innovativa föräldrakontroll för sociala medier. Anmäl dig nu för tidig åtkomst och exklusiva uppdateringar",

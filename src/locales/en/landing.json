@@ -27,6 +27,20 @@
       "description": "We provide resources and support for both parents and kids. Building a safer internet, together! ❤️"
     }
   },
+  "featureShowcase": {
+    "smartProtection": {
+      "title": "Smart Protection",
+      "description": "Advanced AI algorithms that adapt to protect your child in real-time"
+    },
+    "positiveGrowth": {
+      "title": "Positive Growth",
+      "description": "Foster healthy online habits while maintaining independence"
+    },
+    "familyConnection": {
+      "title": "Family Connection",
+      "description": "Stay connected and build trust through open communication"
+    }
+  },
   "waitlist": {
     "title": "Join the Waitlist",
     "description": "Be among the first to experience Brelli and our innovative social media parental controls. Sign up now for early access and exclusive updates",

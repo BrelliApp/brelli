@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Shield, Sparkles, Heart } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const FeatureShowcase = () => {
+  const { t } = useTranslation('landing');
+
   return (
     <div className="relative py-12">
       {/* Decorative background elements */}
@@ -17,8 +20,8 @@ const FeatureShowcase = () => {
             className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all"
           >
             <Shield className="h-12 w-12 text-blue-500 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Smart Protection</h3>
-            <p className="text-gray-600">Advanced AI algorithms that adapt to protect your child in real-time</p>
+            <h3 className="text-xl font-semibold mb-2">{t('featureShowcase.smartProtection.title')}</h3>
+            <p className="text-gray-600">{t('featureShowcase.smartProtection.description')}</p>
           </motion.div>
 
           <motion.div
@@ -28,8 +31,8 @@ const FeatureShowcase = () => {
             className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all"
           >
             <Sparkles className="h-12 w-12 text-purple-500 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Positive Growth</h3>
-            <p className="text-gray-600">Foster healthy online habits while maintaining independence</p>
+            <h3 className="text-xl font-semibold mb-2">{t('featureShowcase.positiveGrowth.title')}</h3>
+            <p className="text-gray-600">{t('featureShowcase.positiveGrowth.description')}</p>
           </motion.div>
 
           <motion.div
@@ -39,8 +42,8 @@ const FeatureShowcase = () => {
             className="p-6 rounded-2xl bg-white/80 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all"
           >
             <Heart className="h-12 w-12 text-pink-500 mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Family Connection</h3>
-            <p className="text-gray-600">Stay connected and build trust through open communication</p>
+            <h3 className="text-xl font-semibold mb-2">{t('featureShowcase.familyConnection.title')}</h3>
+            <p className="text-gray-600">{t('featureShowcase.familyConnection.description')}</p>
           </motion.div>
         </div>
       </div>
