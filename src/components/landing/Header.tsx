@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
@@ -18,16 +17,6 @@ const Header = () => {
         </Link>
         <div className="flex items-center space-x-4">
           <LanguageSwitcher />
-          <Link to="/auth">
-            <Button variant="ghost" className="text-gray-600 hover:text-gray-900">
-              {t('navigation.signIn')}
-            </Button>
-          </Link>
-          <Link to="/auth">
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
-              {t('navigation.getStarted')}
-            </Button>
-          </Link>
         </div>
       </div>
     </header>
