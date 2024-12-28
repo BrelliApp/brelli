@@ -78,7 +78,6 @@ const ActivityCard = ({
           <AccordionTrigger className="hover:no-underline px-4 pt-4 pb-2">
             <div className="flex items-center space-x-3 w-full">
               <Avatar className="h-10 w-10 ring-2 ring-offset-2 ring-gray-100">
-                <AvatarImage src="/placeholder.svg" alt={username} />
                 <AvatarFallback className="bg-gray-100">
                   <Icon className="h-5 w-5 text-gray-500" />
                 </AvatarFallback>
