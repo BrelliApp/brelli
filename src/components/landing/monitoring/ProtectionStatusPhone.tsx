@@ -38,7 +38,7 @@ const ProtectionStatusPhone = () => {
           initialX={20}
           details={{
             severity: "high",
-            device: "iPhone 13",
+            device: "Samsung Galaxy S23",
             location: "Home",
             description: "Accessed video content containing explicit violence. Multiple instances detected in the last hour."
           }}
@@ -54,7 +54,7 @@ const ProtectionStatusPhone = () => {
           initialX={20}
           details={{
             severity: "high",
-            device: "MacBook Pro",
+            device: "Samsung Galaxy Tab S9",
             location: "School",
             description: "Received multiple aggressive messages from unknown contacts. Bullying indicators detected."
           }}
@@ -70,7 +70,7 @@ const ProtectionStatusPhone = () => {
           initialX={20}
           details={{
             severity: "medium",
-            device: "iPhone 13",
+            device: "Samsung Galaxy S23",
             location: "Unknown",
             description: "Attempted to access age-restricted content. Access was blocked automatically."
           }}
@@ -86,7 +86,7 @@ const ProtectionStatusPhone = () => {
           initialX={20}
           details={{
             severity: "medium",
-            device: "iPhone 13",
+            device: "Samsung Galaxy S23",
             location: "Home",
             description: "Engaged with content containing references to alcohol and substance use."
           }}
@@ -103,7 +103,7 @@ const ProtectionStatusPhone = () => {
           isNew={false}
           details={{
             severity: "low",
-            device: "iPad",
+            device: "Samsung Galaxy Tab S9",
             location: "Home",
             description: "Extended viewing session detected. Screen time limit approaching."
           }}
