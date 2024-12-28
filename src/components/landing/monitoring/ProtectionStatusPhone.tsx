@@ -36,6 +36,12 @@ const ProtectionStatusPhone = () => {
           timestamp="2:40pm"
           delay={0.2}
           initialX={20}
+          details={{
+            severity: "high",
+            device: "iPhone 13",
+            location: "Home",
+            description: "Accessed video content containing explicit violence. Multiple instances detected in the last hour."
+          }}
         />
         
         <ActivityCard
@@ -46,6 +52,12 @@ const ProtectionStatusPhone = () => {
           timestamp="2:35pm"
           delay={0.4}
           initialX={20}
+          details={{
+            severity: "high",
+            device: "MacBook Pro",
+            location: "School",
+            description: "Received multiple aggressive messages from unknown contacts. Bullying indicators detected."
+          }}
         />
         
         <ActivityCard
@@ -56,6 +68,12 @@ const ProtectionStatusPhone = () => {
           timestamp="2:30pm"
           delay={0.6}
           initialX={20}
+          details={{
+            severity: "medium",
+            device: "iPhone 13",
+            location: "Unknown",
+            description: "Attempted to access age-restricted content. Access was blocked automatically."
+          }}
         />
         
         <ActivityCard
@@ -66,6 +84,12 @@ const ProtectionStatusPhone = () => {
           timestamp="2:25pm"
           delay={0.8}
           initialX={20}
+          details={{
+            severity: "medium",
+            device: "iPhone 13",
+            location: "Home",
+            description: "Engaged with content containing references to alcohol and substance use."
+          }}
         />
         
         <ActivityCard
@@ -77,6 +101,12 @@ const ProtectionStatusPhone = () => {
           delay={1.0}
           initialX={20}
           isNew={false}
+          details={{
+            severity: "low",
+            device: "iPad",
+            location: "Home",
+            description: "Extended viewing session detected. Screen time limit approaching."
+          }}
         />
       </div>
     </div>
